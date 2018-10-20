@@ -5,6 +5,6 @@ module.exports = {
     "node": true
   },
   "rules": {
-    "no-param-reassign": ["error", { "props": false }]
+    "no-param-reassign": ["error", { "props": false }],
   }
 };
