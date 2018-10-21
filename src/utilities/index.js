@@ -1,2 +1,2 @@
-export * from './undefinedOrNull';
-export * from './authHeader'
+export { default as undefinedOrNull } from './undefinedOrNull';
+export { default as authHeader } from './authHeader';
