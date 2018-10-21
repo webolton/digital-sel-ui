@@ -1,3 +1,5 @@
+/* eslint "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }] */
+
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
