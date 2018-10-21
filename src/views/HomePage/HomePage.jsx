@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import classNames from "classnames";
+import withStyles from "@material-ui/core/styles/withStyles";
+
+import homePageStyle from "assets/javascripts/views/homePage";
 
 class HomePage extends React.Component {
 
   render() {
+    const { classes, ...rest } = this.props;
     return (
-      <div className="col-md-12 col-md-offset-3">
+      <div>
         <h1>Welcome to the Digital South English Legendary</h1>
       </div>
     );
@@ -20,4 +25,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps)(withStyles(homePageStyle)(HomePage));
