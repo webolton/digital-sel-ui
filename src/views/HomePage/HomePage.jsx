@@ -5,13 +5,29 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 import homePageStyle from "assets/javascripts/views/homePage";
 
+import { Header } from "components/Header";
+import HeaderLinks from "components/Header/HeaderLinks";
+
+const dashboardRoutes = [];
+
 class HomePage extends React.Component {
 
   render() {
     const { classes, ...rest } = this.props;
     return (
       <div>
-        <h1>Welcome to the Digital South English Legendary</h1>
+        <Header
+          color="transparent"
+          routes={dashboardRoutes}
+          brand="Material Kit React"
+          rightLinks={<HeaderLinks />}
+          fixed
+          changeColorOnScroll={{
+            height: 400,
+            color: "white"
+          }}
+          {...rest}
+        />
       </div>
     );
   }
