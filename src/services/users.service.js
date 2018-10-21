@@ -1,5 +1,4 @@
-import authHeader from '../helpers';
-import undefinedOrNull from '../helpers';
+import { authHeader, undefinedOrNull } from '../utilities';
 
 const API_URL = 'http://localhost:4000';
 
@@ -56,7 +55,7 @@ function logout() {
   localStorage.removeItem('currentUser');
   const requestOptions = {
     method: 'DELETE',
-    headers: authHeader()
+    headers: authHeader(),
   };
   return fetch(`${API_URL}/users/sign_out`, requestOptions).then(handleResponse);
 }
@@ -64,7 +63,7 @@ function logout() {
 function getAllUsers() {
   const requestOptions = {
     method: 'GET',
-    headers: authHeader()
+    headers: authHeader(),
   };
 
   return fetch(`${API_URL}/users`, requestOptions).then(handleResponse);
@@ -73,7 +72,7 @@ function getAllUsers() {
 function getUserById(id) {
   const requestOptions = {
     method: 'GET',
-    headers: authHeader()
+    headers: authHeader(),
   };
 
   return fetch(`${API_URL}/users/${id}`, requestOptions).then(handleResponse);
@@ -83,5 +82,5 @@ export const userService = {
   login,
   logout,
   getAllUsers,
-  getUserById
+  getUserById,
 };
