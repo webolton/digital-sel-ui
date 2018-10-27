@@ -6,5 +6,15 @@ module.exports = {
   },
   "rules": {
     "no-param-reassign": ["error", { "props": false }],
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "src"
+        ]
+      }
+    }
   }
 };
