@@ -16,18 +16,6 @@ class HomePage extends React.Component {
     const { classes, ...rest } = this.props;
     return (
       <div>
-        <Header
-          color="transparent"
-          routes={dashboardRoutes}
-          brand="Material Kit React"
-          rightLinks={<HeaderLinks />}
-          fixed
-          changeColorOnScroll={{
-            height: 400,
-            color: "white"
-          }}
-          {...rest}
-        />
       </div>
     );
   }
