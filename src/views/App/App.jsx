@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Routes from 'routes';
 import withStyles from '@material-ui/core/styles/withStyles';
-import homePageStyle from 'assets/javascripts/views/homePage';
+import headerStyle from 'assets/javascripts/components/headerStyle';
 import Header from 'components/Header';
 import HeaderLinks from 'components/Header/HeaderLinks';
 
@@ -16,15 +16,12 @@ export class App extends React.Component {
     return (
       <div>
         <Header
-          color="info"
+          color="lightGray"
           routes={dashboardRoutes}
-          brand="Digital South English Legendary"
+          brand="The Digital South English Legendary"
           rightLinks={<HeaderLinks />}
           fixed="false"
-          changeColorOnScroll={{
-            height: 400,
-            color: 'white',
-          }}
+          changeColorOnScroll="false"
           {...rest}
         />
         <Routes currentUser={currentUser} />
@@ -41,4 +38,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(withStyles(homePageStyle)(App)));
+export default withRouter(connect(mapStateToProps)(withStyles(headerStyle)(App)));
