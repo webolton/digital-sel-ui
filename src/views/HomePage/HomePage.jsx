@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import homePageStyle from "assets/javascripts/views/homePage";
+import homePageStyle from "assets/javascripts/views/homePageStyle";
 
-import { Header } from "components/Header";
-import HeaderLinks from "components/Header/HeaderLinks";
 
 const dashboardRoutes = [];
 
