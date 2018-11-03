@@ -1,8 +1,9 @@
-/* eslit react/destructuring-assignment: 0 */
+/* eslint react/destructuring-assignment: 0 */
 
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -24,8 +25,8 @@ class Header extends React.Component {
   }
 
   handleDrawerToggle() {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
-  };
+    this.setState(prevState => ({ mobileOpen: !prevState.mobileOpen }));
+  }
 
   render() {
     const {
@@ -45,7 +46,7 @@ class Header extends React.Component {
     });
     const moeIcon = <img src={moeImage} className={classes.brandIcon} alt="Mary of Egypt icon" />;
     const brandComponent = (
-      <Button className={classes.title}>
+      <Button className={classes.title} component={Link} to="/">
         {moeIcon}
         {brand}
       </Button>
@@ -106,8 +107,17 @@ Header.propTypes = {
   rightLinks: PropTypes.node,
   leftLinks: PropTypes.node,
   brand: PropTypes.string,
-  fixed: PropTypes.bool,
   absolute: PropTypes.bool,
+  fixed: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  color: 'primary',
+  rightLinks: undefined,
+  leftLinks: undefined,
+  brand: undefined,
+  absolute: false,
+  fixed: true,
 };
 
 export default withStyles(headerStyle)(Header);
