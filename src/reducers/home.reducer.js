@@ -1,5 +1,3 @@
 const initialState = {};
 
-export default (state = initialState) => {
-  return state;
-};
+export default (state = initialState) => state;

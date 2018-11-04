@@ -4,9 +4,8 @@ const authHeader = () => {
 
   if (currentUser && currentUser.token) {
     return { Authorization: currentUser.token };
-  } else {
-    return {};
   }
+  return {};
 };
 
 export default authHeader;
