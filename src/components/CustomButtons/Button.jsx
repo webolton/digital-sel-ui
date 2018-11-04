@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Button from "@material-ui/core/Button";
-import buttonStyle from "assets/javascripts/components/buttonStyle.jsx";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Button from '@material-ui/core/Button';
+import buttonStyle from 'assets/javascripts/components/buttonStyle';
 
 function RegularButton({ ...props }) {
   const {
@@ -32,7 +32,7 @@ function RegularButton({ ...props }) {
     [classes.block]: block,
     [classes.link]: link,
     [classes.justIcon]: justIcon,
-    [className]: className
+    [className]: className,
   });
   return (
     <Button {...rest} className={btnClasses}>
@@ -44,27 +44,39 @@ function RegularButton({ ...props }) {
 RegularButton.propTypes = {
   classes: PropTypes.object.isRequired,
   color: PropTypes.oneOf([
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose",
-    "white",
-    "facebook",
-    "twitter",
-    "google",
-    "github",
-    "transparent"
+    'primary',
+    'info',
+    'success',
+    'warning',
+    'danger',
+    'rose',
+    'white',
+    'facebook',
+    'twitter',
+    'google',
+    'github',
+    'transparent',
   ]),
-  size: PropTypes.oneOf(["sm", "lg"]),
+  size: PropTypes.oneOf(['sm', 'lg']),
   simple: PropTypes.bool,
   round: PropTypes.bool,
   fullWidth: PropTypes.bool,
   disabled: PropTypes.bool,
   block: PropTypes.bool,
   link: PropTypes.bool,
-  justIcon: PropTypes.bool
+  justIcon: PropTypes.bool,
+};
+
+RegularButton.defaultProps = {
+  color: 'primary',
+  size: 'lg',
+  simple: true,
+  round: false,
+  fullWidth: true,
+  disabled: false,
+  block: true,
+  link: undefined,
+  justIcon: false,
 };
 
 export default withStyles(buttonStyle)(RegularButton);
