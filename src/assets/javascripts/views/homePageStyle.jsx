@@ -1,4 +1,4 @@
-import { container, title } from "assets/javascripts/vendors/material-ui/material-kit-react.jsx";
+import { container, title } from 'assets/javascripts/digital-sel-ui';
 
 const homePageStyle = {
   container: {
