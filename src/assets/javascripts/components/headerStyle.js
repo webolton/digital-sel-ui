@@ -5,8 +5,8 @@ import {
   lightGrayColor,
   transition,
   boxShadow,
-  drawerWidth
-} from '../digital-sel-ui';
+  drawerWidth,
+} from 'assets/javascripts/digital-sel-ui';
 
 const headerStyle = {
   appBar: {
@@ -25,15 +25,15 @@ const headerStyle = {
     flexFlow: 'row nowrap',
     justifyContent: 'flex-start',
     position: 'relative',
-    zIndex: 'unset'
+    zIndex: 'unset',
   },
   absolute: {
     position: 'absolute',
-    zIndex: '1100'
+    zIndex: '1100',
   },
   fixed: {
     position: 'fixed',
-    zIndex: '1100'
+    zIndex: '1100',
   },
   container: {
     ...container,
@@ -42,10 +42,10 @@ const headerStyle = {
     alignItems: 'center',
     justifyContent: 'space-between',
     display: 'flex',
-    flexWrap: 'nowrap'
+    flexWrap: 'nowrap',
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   title: {
     ...defaultFont,
@@ -57,14 +57,14 @@ const headerStyle = {
     color: 'inherit',
     '&:hover,&:focus': {
       color: 'inherit',
-      background: 'transparent'
-    }
+      background: 'transparent',
+    },
   },
   brandIcon: {
     paddingRight: '15px',
   },
   appResponsive: {
-    margin: '20px 10px'
+    margin: '20px 10px',
   },
   lightGray: {
     border: '0',
@@ -73,13 +73,13 @@ const headerStyle = {
     color: '#555555',
     backgroundColor: lightGrayColor,
     boxShadow:
-      '0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)'
+      '0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)',
   },
   dark: {
     color: '#FFFFFF',
     backgroundColor: '#212121 !important',
     boxShadow:
-      '0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(33, 33, 33, 0.46)'
+      '0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(33, 33, 33, 0.46)',
   },
   drawerPaper: {
     border: 'none',
@@ -101,8 +101,8 @@ const headerStyle = {
     textAlign: 'left',
     paddingRight: '0px',
     paddingLeft: '0',
-    ...transition
-  }
+    ...transition,
+  },
 };
 
 export default headerStyle;
