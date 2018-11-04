@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Tooltip from '@material-ui/core/Tooltip';
 import CustomDropdown from 'components/CustomDropdown/CustomDropdown';
-import Button from 'components/CustomButtons/Button.jsx';
+import Button from 'components/CustomButtons/Button';
 import headerLinksStyle from 'assets/javascripts/components/headerLinksStyle';
 
 function HeaderLinks({ ...props }) {
@@ -15,7 +16,7 @@ function HeaderLinks({ ...props }) {
       <Tooltip
         id="login-button"
         title="Login to save textual notes"
-        placement={window.innerWidth > 959 ? "top" : "left"}
+        placement={window.innerWidth > 959 ? 'top' : 'left'}
         classes={{ tooltip: classes.tooltip }}
       >
         <Button
@@ -38,10 +39,10 @@ function HeaderLinks({ ...props }) {
           buttonText="William Bolton"
           buttonProps={{
             className: classes.navLink,
-            color: "transparent"
+            color: 'transparent',
           }}
           dropdownList={[
-            <Link to="/" className={classes.dropdownLink} >
+            <Link to="/" className={classes.dropdownLink}>
               User Profile
             </Link>,
             <Link to="/" className={classes.dropdownLink}>
@@ -53,5 +54,9 @@ function HeaderLinks({ ...props }) {
     </List>
   );
 }
+
+HeaderLinks.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(headerLinksStyle)(HeaderLinks);
