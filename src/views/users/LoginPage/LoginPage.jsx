@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { userActions } from 'actions';
 import withStyles from '@material-ui/core/styles/withStyles';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Lock from '@material-ui/icons/Lock';
 import Icon from '@material-ui/core/Icon';
 import Email from '@material-ui/icons/Email';
 import People from '@material-ui/icons/People';
@@ -84,25 +85,9 @@ class LoginPage extends React.Component {
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>Login</h4>
                     </CardHeader>
-                    <p className={classes.divider}>Or Be Classical</p>
                     <CardBody>
                       <CustomInput
-                        labelText="First Name..."
-                        id="first"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <People className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Email..."
+                        labelText="Email"
                         id="email"
                         formControlProps={{
                           fullWidth: true
@@ -126,9 +111,8 @@ class LoginPage extends React.Component {
                           type: "password",
                           endAdornment: (
                             <InputAdornment position="end">
-                              <Icon className={classes.inputIconsColor}>
-                                lock_outline
-                              </Icon>
+                              <Lock className={classes.inputIconsColor}>
+                              </Lock>
                             </InputAdornment>
                           )
                         }}

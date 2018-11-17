@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { List, ListItem, withStyles } from "@material-ui/core";
 import Favorite from "@material-ui/icons/Favorite";
 
-import footerStyle from "assets/javascripts/components/footerStyle.jsx";
+import footerStyle from "assets/javascripts/components/footerStyle";
 
 function Footer({ ...props }) {
   const { classes, whiteFont } = props;
