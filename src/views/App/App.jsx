@@ -20,7 +20,7 @@ export class App extends React.Component {
           routes={dashboardRoutes}
           brand="The Digital South English Legendary"
           rightLinks={<HeaderLinks />}
-          fixed="false"
+          absolute
           changeColorOnScroll="false"
           {...rest}
         />
