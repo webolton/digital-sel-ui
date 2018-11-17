@@ -2,7 +2,12 @@ module.exports = {
   "extends": "airbnb",
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es6": true,
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
   },
   "rules": {
     "no-param-reassign": ["error", { "props": false }],
