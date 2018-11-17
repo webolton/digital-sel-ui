@@ -1,23 +1,32 @@
 /*!
 
- =========================================================
- * Digital SEL UI - v0.1.0 *
- * Based on *
- * Material Kit React - v1.3.0 based on Material Kit - v2.0.2
- =========================================================
+ ┍——————————————————————————————- /ᐠ｡ꞈ｡ᐟ\ ——————————————————————————————-┑
+ |                       Digital SEL UI - v0.1.0                       |
+ |                               Based on                              |
+ |       Material Kit React - v1.3.0 based on Material Kit - v2.0.2    |
+ ┕——————————————————————————————-(..)(..) ∫∫———————————————————————————┙
 
- * Copyright 2018 William E. Bolton (http://www.william-bolton.com)
- * Licensed under MIT (https://github.com/creativetimofficial/material-kit-react/blob/master/LICENSE.md)
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ Copyright 2018 William E. Bolton (http://www.william-bolton.com)
+ Licensed under MIT (https://github.com/creativetimofficial/material-kit-react/blob/master/LICENSE.md)
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
 
-// ##############################
-// // // Variables - Styles that are used on more than one component
-// #############################
+// =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^=
+//                            COLORS                             //
+// =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^=
+
+const lochmaraBlue = '#336FAF';
+const darkCerulean = '#005794';
+
+const primaryColor = lochmaraBlue;
+const warningColor = '#ff9800';
+const dangerColor = '#f44336';
+const successColor = '#4caf50';
+const infoColor = '#00acc1';
+const roseColor = '#336FAF';
+const grayColor = '#999999';
+const lightGrayColor = '#F8F9F7';
 
 const drawerWidth = 260;
 
@@ -70,18 +79,6 @@ const defaultFont = {
   lineHeight: '1.5em',
 };
 
-const lochmaraBlue = '#336FAF';
-
-const primaryColor = lochmaraBlue;
-const warningColor = '#ff9800';
-const dangerColor = '#f44336';
-const successColor = '#4caf50';
-const infoColor = '#00acc1';
-const roseColor = '#336FAF';
-const grayColor = '#999999';
-const lightGrayColor = '#F8F9F7';
-
-
 const primaryBoxShadow = {
   boxShadow:
     '0 12px 20px -10px rgba(51, 111, 175, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(51, 111, 175, 0.2)',
@@ -129,7 +126,7 @@ const infoCardHeader = {
 };
 const primaryCardHeader = {
   color: '#fff',
-  background: 'linear-gradient(60deg, #ab47bc, #8e24aa)',
+  background: 'linear-gradient(60deg, #336FAF, #005794)',
   ...primaryBoxShadow,
 };
 const roseCardHeader = {
