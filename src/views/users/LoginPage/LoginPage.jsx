@@ -1,24 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from 'actions';
+import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Lock from '@material-ui/icons/Lock';
-import Icon from '@material-ui/core/Icon';
 import Email from '@material-ui/icons/Email';
-import People from '@material-ui/icons/People';
-import Header from 'components/Header/Header';
-import HeaderLinks from 'components/Header/HeaderLinks';
-import Footer from 'components/Footer/Footer';
-import GridContainer from 'components/Grid/GridContainer.jsx';
-import GridItem from 'components/Grid/GridItem.jsx';
-import Button from 'components/CustomButtons/Button.jsx';
+import GridContainer from 'components/Grid/GridContainer';
+import GridItem from 'components/Grid/GridItem';
+import Button from 'components/CustomButtons/Button';
 import Card from 'components/Card/Card';
-import CardBody from 'components/Card/CardBody.jsx';
-import CardHeader from 'components/Card/CardHeader.jsx';
-import CardFooter from 'components/Card/CardFooter.jsx';
-import CustomInput from 'components/CustomInput/CustomInput.jsx';
+import CardBody from 'components/Card/CardBody';
+import CardHeader from 'components/Card/CardHeader';
+import CardFooter from 'components/Card/CardFooter';
+import CustomInput from 'components/CustomInput/CustomInput';
 import loginPageStyle from 'assets/javascripts/views/users/loginPageStyle';
 
 class LoginPage extends React.Component {
@@ -39,6 +34,15 @@ class LoginPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    setTimeout(
+      () => {
+        this.setState({ cardAnimaton: '' });
+      },
+      50,
+    );
+  }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -55,16 +59,6 @@ class LoginPage extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // we add a hidden class to the card and after 700 ms we delete it and the transition appears
-    setTimeout(
-      function() {
-        this.setState({ cardAnimaton: "" });
-      }.bind(this),
-      50
-    );
-  }
-
   render() {
     const { loggingIn, classes, ...rest } = this.props;
     const { email, password, submitted } = this.state;
@@ -73,15 +67,15 @@ class LoginPage extends React.Component {
         <div
           className={classes.pageHeader}
           style={{
-            backgroundSize: "cover",
-            backgroundPosition: "top center"
+            backgroundSize: 'cover',
+            backgroundPosition: 'top center',
           }}
         >
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={4}>
                 <Card className={classes[this.state.cardAnimaton]}>
-                  <form className={classes.form}>
+                  <form className={classes.form} onSubmit={this.handleSubmit}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>Login</h4>
                     </CardHeader>
@@ -90,37 +84,40 @@ class LoginPage extends React.Component {
                         labelText="Email"
                         id="email"
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
-                          type: "email",
+                          type: 'email',
+                          onChange: this.handleChange,
+                          name: 'email',
                           endAdornment: (
                             <InputAdornment position="end">
                               <Email className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
                         labelText="Password"
                         id="pass"
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
-                          type: "password",
+                          type: 'password',
+                          onChange: this.handleChange,
+                          name: 'password',
                           endAdornment: (
                             <InputAdornment position="end">
-                              <Lock className={classes.inputIconsColor}>
-                              </Lock>
+                              <Lock className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg">
-                        Get started
+                      <Button simple color="primary" size="lg" type="submit">
+                        Submit
                       </Button>
                     </CardFooter>
                   </form>
@@ -128,33 +125,7 @@ class LoginPage extends React.Component {
               </GridItem>
             </GridContainer>
           </div>
-          <Footer whiteFont />
         </div>
-
-
-
-
-        <form name="form" onSubmit={this.handleSubmit}>
-          <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
-            <label htmlFor="email">Email!!</label>
-              <input type="text" className="form-control" name="email" value={email} onChange={this.handleChange} />
-                {submitted && !email &&
-                  <div className="help-block">Email is required</div>
-                }
-          </div>
-          <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-            <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
-              {submitted && !password &&
-                <div className="help-block">Password is required</div>
-              }
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary">Login</button>
-              {/* for a spinner */}
-              { loggingIn }
-          </div>
-        </form>
       </div>
     );
   }
@@ -163,8 +134,29 @@ class LoginPage extends React.Component {
 function mapStateToProps(state) {
   const { loggingIn } = state.authentication;
   return {
-    loggingIn
+    loggingIn,
   };
 }
+
+
+LoginPage.defaultProps = {
+  loggingIn: false,
+  rest: {},
+  email: '',
+  password: '',
+  submitted: false,
+  dispatch: {},
+};
+
+LoginPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+  loggingIn: PropTypes.bool,
+  rest: PropTypes.object,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  submitted: PropTypes.bool,
+  dispatch: PropTypes.func,
+};
+
 
 export default connect(mapStateToProps)(withStyles(loginPageStyle)(LoginPage));
