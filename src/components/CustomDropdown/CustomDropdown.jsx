@@ -23,8 +23,11 @@ class CustomDropdown extends React.Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
-  handleClick() {
-    this.setState(state => ({ open: !state.open }));
+  handleCloseAway = (event) => {
+    if (this.anchorEl.contains(event.target)) {
+      return;
+    }
+    this.setState({ open: false });
   }
 
   handleClose(param) {
@@ -34,11 +37,8 @@ class CustomDropdown extends React.Component {
     }
   }
 
-  handleCloseAway(event) {
-    if (this.anchorEl.contains(event.target)) {
-      return;
-    }
-    this.setState({ open: false });
+  handleClick() {
+    this.setState(state => ({ open: !state.open }));
   }
 
   render() {

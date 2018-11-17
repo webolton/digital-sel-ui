@@ -12,6 +12,7 @@ module.exports = {
   "rules": {
     "no-param-reassign": ["error", { "props": false }],
     "react/forbid-prop-types": 0,
+    "react/destructuring-assignment": 0,
   },
   "settings": {
     "import/resolver": {
