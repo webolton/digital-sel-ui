@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import isNil from 'lodash/isNil';
 import withStyles from '@material-ui/core/styles/withStyles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,7 +12,7 @@ import Button from 'components/CustomButtons/Button';
 import headerLinksStyle from 'assets/javascripts/components/headerLinksStyle';
 
 function HeaderLinks({ ...props }) {
-  const { classes } = props;
+  const { classes, currentUser } = props;
   const LogInButton = (() => (
     <ListItem className={classes.listItem}>
       <Tooltip
@@ -32,7 +34,7 @@ function HeaderLinks({ ...props }) {
   ));
   return (
     <List className={classes.list}>
-      { true ? <LogInButton /> : null }
+      { isNil(currentUser) ? <LogInButton /> : null }
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
@@ -59,4 +61,12 @@ HeaderLinks.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(headerLinksStyle)(HeaderLinks);
+function mapStateToProps(state) {
+  const { authentication } = state;
+  const { currentUser } = authentication;
+  return {
+    currentUser
+  };
+}
+
+export default connect(mapStateToProps)(withStyles(headerLinksStyle)(HeaderLinks));

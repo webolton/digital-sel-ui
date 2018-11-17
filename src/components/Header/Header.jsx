@@ -37,6 +37,7 @@ class Header extends React.Component {
       brand,
       fixed,
       absolute,
+      currentUser,
     } = this.props;
     const appBarClasses = classNames({
       [classes.appBar]: true,
@@ -116,8 +117,8 @@ Header.defaultProps = {
   rightLinks: undefined,
   leftLinks: undefined,
   brand: undefined,
-  absolute: false,
-  fixed: true,
+  absolute: true,
+  fixed: false,
 };
 
 export default withStyles(headerStyle)(Header);
