@@ -9,7 +9,7 @@ import Email from '@material-ui/icons/Email';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
-import Card from 'components/Card/Card';
+import Card from 'components/Card';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardFooter from 'components/Card/CardFooter';
@@ -137,7 +137,6 @@ function mapStateToProps(state) {
     loggingIn,
   };
 }
-
 
 LoginPage.defaultProps = {
   loggingIn: false,
