@@ -1,4 +1,5 @@
 import { container } from 'assets/javascripts/digital-sel-ui';
+import { dangerColor } from 'assets/javascripts/digital-sel-ui';
 
 const signupPageStyle = {
   container: {
@@ -83,6 +84,10 @@ const signupPageStyle = {
   },
   inputIconsColor: {
     color: '#495057',
+  },
+  unauthorized: {
+    color: dangerColor,
+    textAlign: 'center',
   },
 };
 

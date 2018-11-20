@@ -16,12 +16,14 @@
 //                            COLORS                             //
 // =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^=
 
-const lochmaraBlue = '#336FAF';
-const darkCerulean = '#005794';
+// Blues
+const lochmaraBlue = '#336FAF'; // Primary
+const darkCerulean = '#005794'; // Dark Version of Primary
+const darkRed = '#AF3533';
 
 const primaryColor = lochmaraBlue;
 const warningColor = '#ff9800';
-const dangerColor = '#f44336';
+const dangerColor = darkRed;
 const successColor = '#4caf50';
 const infoColor = '#00acc1';
 const roseColor = '#336FAF';
