@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { userActions } from 'actions';
@@ -60,7 +62,13 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    const { loggingIn, classes, ...rest } = this.props;
+    const {
+      loggingIn,
+      classes,
+      alert,
+      ...rest
+    } = this.props;
+
     const { email, password, submitted } = this.state;
     return (
       <div>
@@ -80,6 +88,9 @@ class LoginPage extends React.Component {
                       <h4>Login</h4>
                     </CardHeader>
                     <CardBody>
+                      {alert.message
+                        && <p className={classes.unauthorized}>Incorrect email or password.</p>
+                      }
                       <CustomInput
                         labelText="Email"
                         id="email"
@@ -133,8 +144,10 @@ class LoginPage extends React.Component {
 
 function mapStateToProps(state) {
   const { loggingIn } = state.authentication;
+  const { alert } = state;
   return {
     loggingIn,
+    alert,
   };
 }
 
@@ -145,6 +158,7 @@ LoginPage.defaultProps = {
   password: '',
   submitted: false,
   dispatch: {},
+  alert: {},
 };
 
 LoginPage.propTypes = {
@@ -155,6 +169,7 @@ LoginPage.propTypes = {
   password: PropTypes.string,
   submitted: PropTypes.bool,
   dispatch: PropTypes.func,
+  alert: PropTypes.object,
 };
 
 
