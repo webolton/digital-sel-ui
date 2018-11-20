@@ -3,13 +3,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import history from 'store/history';
 import Routes from 'routes';
 import withStyles from '@material-ui/core/styles/withStyles';
 import headerStyle from 'assets/javascripts/components/headerStyle';
 import Header from 'components/Header';
 import HeaderLinks from 'components/Header/HeaderLinks';
+import { alertActions } from 'actions';
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    const { dispatch } = this.props;
+    const unlisten = history.listen((location, action) => {
+      dispatch(alertActions.clear());
+    });
+
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        dispatch(alertActions.clear());
+      }
+    }
+  }
+
   render() {
     const dashboardRoutes = [];
     const { classes, currentUser, ...rest } = this.props;

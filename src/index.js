@@ -6,7 +6,8 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import App from 'views/App';
-import { store, persistor, history } from './store/store';
+import { store, persistor } from './store/store';
+import history from 'store/history';
 import './assets/stylesheets/main.css';
 
 import registerServiceWorker from './registerServiceWorker';

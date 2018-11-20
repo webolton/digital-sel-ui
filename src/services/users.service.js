@@ -16,9 +16,6 @@ function handleResponse(response) {
       const data = text && JSON.parse(text);
       setAuthToken(authToken, data);
       if (!response.ok) {
-        if (response.status === 401) {
-          return { error: 'Unauthorized' };
-        }
         const error = (data && data.message) || response.statusText;
         return Promise.reject(error);
       }
