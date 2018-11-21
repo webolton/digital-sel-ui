@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginPage /> render() renders the component 1`] = `
+<LoginPage
+  alert={Object {}}
+  classes={
+    Object {
+      "cardFooter": "LoginPage-cardFooter-8",
+      "cardHeader": "LoginPage-cardHeader-5",
+      "cardHidden": "LoginPage-cardHidden-2",
+      "container": "LoginPage-container-1",
+      "divider": "LoginPage-divider-7",
+      "form": "LoginPage-form-4",
+      "inputIconsColor": "LoginPage-inputIconsColor-10",
+      "pageHeader": "LoginPage-pageHeader-3",
+      "socialIcons": "LoginPage-socialIcons-6",
+      "socialLine": "LoginPage-socialLine-9",
+      "unauthorized": "LoginPage-unauthorized-11",
+    }
+  }
+  dispatch={[Function]}
+  email=""
+  loggingIn={false}
+  password=""
+  rest={Object {}}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  submitted={false}
+/>
+`;
