@@ -37,7 +37,6 @@ class Header extends React.Component {
       brand,
       fixed,
       absolute,
-      currentUser,
     } = this.props;
     const appBarClasses = classNames({
       [classes.appBar]: true,
