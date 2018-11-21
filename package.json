@@ -52,6 +52,7 @@
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "enzyme-adapter-react-16": "^1.7.0",
+    "eslint-config-airbnb": "^17.1.0",
     "jest": "^23.6.0",
     "node-sass": "^4.9.4",
     "react-test-renderer": "^16.6.3",
@@ -63,6 +64,9 @@
     "setupTestFrameworkScriptFile": "<rootDir>src/__tests__/setup/setupEnzyme.js",
     "testPathIgnorePatterns": [
       "<rootDir>src/__tests__/setup/"
+    ],
+    "modulePaths": [
+      "<rootDir>/src/"
     ]
   }
 }
