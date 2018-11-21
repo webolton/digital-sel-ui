@@ -10,6 +10,7 @@
     "connected-react-router": "^4.5.0",
     "enzyme": "^3.7.0",
     "enzyme-to-json": "^3.3.4",
+    "fetch-mock": "^7.2.5",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "material-ui": "^0.20.2",
@@ -63,7 +64,8 @@
     "verbose": true,
     "setupTestFrameworkScriptFile": "<rootDir>src/__tests__/setup/setupEnzyme.js",
     "testPathIgnorePatterns": [
-      "<rootDir>src/__tests__/setup/"
+      "<rootDir>/src/__tests__/setup/",
+      "<rootDir>/src/__tests__/.eslintrc"
     ],
     "modulePaths": [
       "<rootDir>/src/"
