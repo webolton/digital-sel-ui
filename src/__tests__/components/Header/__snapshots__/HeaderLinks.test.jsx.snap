@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HeaderLinks /> render() when there is no currentUser renders the component 1`] = `
+<HeaderLinks
+  classes={
+    Object {
+      "dropdownLink": "HeaderLinks-dropdownLink-10",
+      "icons": "HeaderLinks-icons-8",
+      "list": "HeaderLinks-list-1",
+      "listItem": "HeaderLinks-listItem-2",
+      "listItemText": "HeaderLinks-listItemText-3",
+      "marginRight5": "HeaderLinks-marginRight5-12",
+      "navLink": "HeaderLinks-navLink-4",
+      "navLinkActive": "HeaderLinks-navLinkActive-7",
+      "notificationNavLink": "HeaderLinks-notificationNavLink-5",
+      "registerNavLink": "HeaderLinks-registerNavLink-6",
+      "socialIcons": "HeaderLinks-socialIcons-9",
+      "tooltip": "HeaderLinks-tooltip-11",
+    }
+  }
+  dispatch={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+/>
+`;
