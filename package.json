@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "@material-ui/core": "^3.3.0",
     "@material-ui/icons": "^3.0.1",
-    "babel-preset-env": "^1.7.0",
+    "babel-cli": "^6.26.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^4.5.0",
     "enzyme": "^3.7.0",
     "enzyme-to-json": "^3.3.4",
+    "eslint": "^5.9.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-react": "^7.11.1",
     "fetch-mock": "^7.2.5",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
-    "material-ui": "^0.20.2",
     "node-sass-chokidar": "^1.3.4",
     "npm-run-all": "^4.1.3",
     "prop-types": "^15.6.2",
@@ -32,7 +36,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
-    "test": "export NODE_ENV=test && jest",
+    "test": "jest",
     "test:watch": "jest --watch",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -48,10 +52,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
     "@fortawesome/fontawesome-free": "^5.4.1",
-    "babel-jest": "^23.6.0",
-    "babel-preset-es2016": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "enzyme-adapter-react-16": "^1.7.0",
     "eslint-config-airbnb": "^17.1.0",
     "jest": "^23.6.0",
@@ -62,6 +65,10 @@
   },
   "jest": {
     "verbose": true,
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>src/__tests__/setup/setupEnzyme.js",
     "testPathIgnorePatterns": [
       "<rootDir>/src/__tests__/setup/",
