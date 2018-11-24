@@ -15,6 +15,7 @@ function HeaderLinks({ ...props }) {
   const LogInButton = (() => (
     <ListItem className={classes.listItem}>
       <Button
+        id="loginButton"
         component={Link}
         to="/login"
         color="transparent"
@@ -55,8 +56,12 @@ function HeaderLinks({ ...props }) {
 
 HeaderLinks.propTypes = {
   classes: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
 };
+
+HeaderLinks.defaultProps = {
+  currentUser: undefined,
+}
 
 function mapStateToProps(state) {
   const { authentication } = state;
