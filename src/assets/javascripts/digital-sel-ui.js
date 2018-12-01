@@ -20,6 +20,7 @@
 const lochmaraBlue = '#336FAF'; // Primary
 const darkCerulean = '#005794'; // Dark Version of Primary
 const darkRed = '#AF3533';
+const tangerine = '#F08700'
 
 const primaryColor = lochmaraBlue;
 const warningColor = '#ff9800';
