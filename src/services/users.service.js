@@ -1,9 +1,11 @@
-import { authHeader, undefinedOrNull } from '../utilities';
+import { authHeader } from '../utilities';
+import isNil from 'lodash';
+
 
 const API_URL = 'http://localhost:4000';
 
 function setAuthToken(authToken, data) {
-  if (!undefinedOrNull(authToken)) {
+  if (!isNil(authToken)) {
     data.token = authToken;
   }
   return data;
