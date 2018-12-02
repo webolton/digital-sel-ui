@@ -1,6 +1,5 @@
 import { authHeader } from '../utilities';
-import isNil from 'lodash';
-
+import { isNil } from 'lodash';
 
 const API_URL = 'http://localhost:4000';
 
