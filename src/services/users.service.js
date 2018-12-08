@@ -1,29 +1,8 @@
 import { authHeader } from '../utilities';
 import { isNil } from 'lodash';
+import handleResponse from './handleResponse';
 
 const API_URL = 'http://localhost:4000';
-
-function setAuthToken(authToken, data) {
-  if (!isNil(authToken)) {
-    data.token = authToken;
-  }
-  return data;
-}
-
-function handleResponse(response) {
-  const authToken = response.headers.get('Authorization');
-  return response.text().then(
-    (text) => {
-      const data = text && JSON.parse(text);
-      setAuthToken(authToken, data);
-      if (!response.ok) {
-        const error = (data && data.message) || response.statusText;
-        return Promise.reject(error);
-      }
-      return data;
-    },
-  );
-}
 
 function login(email, password) {
   const userParams = { user: { email, password } };
