@@ -39,7 +39,7 @@ function HeaderLinks({ ...props }) {
               color: 'transparent',
             }}
             dropdownList={[
-              <Link to="/" className={classes.dropdownLink}>
+              <Link to={`/users/${currentUser.id}`} className={classes.dropdownLink}>
                 User Profile
               </Link>,
               <Link to="/logout" className={classes.dropdownLink}>
@@ -61,7 +61,7 @@ HeaderLinks.propTypes = {
 
 HeaderLinks.defaultProps = {
   currentUser: undefined,
-}
+};
 
 function mapStateToProps(state) {
   const { authentication } = state;
