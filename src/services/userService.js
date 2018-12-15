@@ -54,9 +54,11 @@ function getUserById(id) {
   return fetch(`${API_URL}/users/${id}`, requestOptions).then(handleResponse);
 }
 
-export const userService = {
+const userService = {
   login,
   logout,
   getAllUsers,
   getUserById,
 };
+
+export default userService
