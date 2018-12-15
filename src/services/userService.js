@@ -1,5 +1,4 @@
 import { authHeader } from '../utilities';
-import { isNil } from 'lodash';
 import handleResponse from './handleResponse';
 
 const API_URL = 'http://localhost:4000';
@@ -61,4 +60,4 @@ const userService = {
   getUserById,
 };
 
-export default userService
+export default userService;
