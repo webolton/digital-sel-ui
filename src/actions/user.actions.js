@@ -1,17 +1,13 @@
 import history from 'store/history';
 import { userConstants } from '../constants';
-import { userService } from '../services';
+import userService from '../services/userService';
 import { alertActions } from '.';
 
-export const userActions = {
-  login,
-  logout,
-  getAllUsers,
-  getUserById,
-  updateUser,
-};
-
 function login(email, password) {
+  function request(currentUser) { return { type: userConstants.LOGIN_REQUEST, currentUser }; }
+  function success(currentUser) { return { type: userConstants.LOGIN_SUCCESS, currentUser }; }
+  function failure(error) { return { type: userConstants.LOGIN_FAILURE, error }; }
+
   return (dispatch) => {
     dispatch(request({ email }));
 
@@ -27,10 +23,6 @@ function login(email, password) {
         },
       );
   };
-
-  function request(currentUser) { return { type: userConstants.LOGIN_REQUEST, currentUser }; }
-  function success(currentUser) { return { type: userConstants.LOGIN_SUCCESS, currentUser }; }
-  function failure(error) { return { type: userConstants.LOGIN_FAILURE, error }; }
 }
 
 function logout() {
@@ -41,8 +33,11 @@ function logout() {
   return { type: userConstants.LOGOUT };
 }
 
-
 function getAllUsers() {
+  function request() { return { type: userConstants.GETALL_REQUEST }; }
+  function success(users) { return { type: userConstants.GETALL_SUCCESS, users }; }
+  function failure(error) { return { type: userConstants.GETALL_FAILURE, error }; }
+
   return (dispatch) => {
     dispatch(request());
     userService.getAllUsers()
@@ -51,20 +46,20 @@ function getAllUsers() {
         error => dispatch(failure(error)),
       );
   };
-
-  function request() { return { type: userConstants.GETALL_REQUEST }; }
-  function success(users) { return { type: userConstants.GETALL_SUCCESS, users }; }
-  function failure(error) { return { type: userConstants.GETALL_FAILURE, error }; }
 }
 
 function getUserById(id) {
+  function request() { return { type: userConstants.GETALL_REQUEST }; }
+  function success(users) { return { type: userConstants.GETALL_SUCCESS, users }; }
+  function failure(error) { return { type: userConstants.GETALL_FAILURE, error }; }
+
   return (dispatch) => {
     dispatch(request({ id }));
 
     userService.getUserById(id)
       .then(
         (userData) => {
-          const user = userData.user;
+          const { user } = userData;
           dispatch(success(user));
         },
         (error) => {
@@ -73,17 +68,17 @@ function getUserById(id) {
         },
       );
   };
-
-  function request(user) { return { type: userConstants.GETBYUSERID_REQUEST, user }; }
-  function success(user) { return { type: userConstants.GETBYUSERID_SUCCESS, user }; }
-  function failure(error) { return { type: userConstants.GETBYUSERID_FAILURE, error }; }
 }
 
-function updateUser(user) {
-  return (dispatch) => {
-    dispatch(request(user));
+function updateUser(userData) {
+  function request(user) { return { type: userConstants.UPDATE_REQUEST, user }; }
+  function success(user) { return { type: userConstants.UPDATE_SUCCESS, user }; }
+  function failure(error) { return { type: userConstants.UPDATE_FAILURE, error }; }
 
-    userService.updateUser(user)
+  return (dispatch) => {
+    dispatch(request(userData));
+
+    userService.updateUser(userData)
       .then(
         (user) => {
           dispatch(success(user));
@@ -95,8 +90,14 @@ function updateUser(user) {
         },
       );
   };
-
-  function request(user) { return { type: userConstants.UPDATE_REQUEST, user }; }
-  function success(user) { return { type: userConstants.UPDATE_SUCCESS, user }; }
-  function failure(error) { return { type: userConstants.UPDATE_FAILURE, error }; }
 }
+
+const userActions = {
+  login,
+  logout,
+  getAllUsers,
+  getUserById,
+  updateUser,
+};
+
+export default userActions;
