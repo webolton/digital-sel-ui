@@ -1,12 +1,12 @@
 import history from 'store/history';
-import { userConstants } from '../constants';
-import userService from '../services/userService';
+import userConstants from 'constants/userConstants';
+import userService from 'services/userService';
 import { alertActions } from '.';
 
 function login(email, password) {
-  function request(currentUser) { return { type: userConstants.LOGIN_REQUEST, currentUser }; }
-  function success(currentUser) { return { type: userConstants.LOGIN_SUCCESS, currentUser }; }
-  function failure(error) { return { type: userConstants.LOGIN_FAILURE, error }; }
+  function request(currentUser) { return { type: userConstants.USER_LOGIN_REQUEST }; }
+  function success(currentUser) { return { type: userConstants.USER_LOGIN_SUCCESS, currentUser }; }
+  function failure(error) { return { type: userConstants.USER_LOGIN_FAILURE, error }; }
 
   return (dispatch) => {
     dispatch(request({ email }));

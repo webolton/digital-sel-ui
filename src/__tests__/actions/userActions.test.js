@@ -27,7 +27,7 @@ describe('userActions', () => {
           currentUser: {
             email: testEmail,
           },
-          type: 'USERS_LOGIN_REQUEST',
+          type: 'USER_LOGIN_REQUEST',
         },
       ];
       store.dispatch(userActions.login(testEmail, testPw));

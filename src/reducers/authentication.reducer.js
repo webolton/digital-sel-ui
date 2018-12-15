@@ -1,21 +1,21 @@
-import { userConstants } from '../constants';
+import userConstants from 'constants/userConstants';
 
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 const initialState = currentUser ? { loggedIn: true, currentUser } : {};
 
 const authentication = (state = initialState, action) => {
   switch (action.type) {
-    case userConstants.LOGIN_REQUEST:
+    case userConstants.USER_LOGIN_REQUEST:
       return {
         loggingIn: true,
         currentUser: action.currentUser,
       };
-    case userConstants.LOGIN_SUCCESS:
+    case userConstants.USER_LOGIN_SUCCESS:
       return {
         loggedIn: true,
         currentUser: action.currentUser,
       };
-    case userConstants.LOGIN_FAILURE:
+    case userConstants.USER_LOGIN_FAILURE:
       return {};
     case userConstants.LOGOUT:
       return {
