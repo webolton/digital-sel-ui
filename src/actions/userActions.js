@@ -49,9 +49,9 @@ function getAllUsers() {
 }
 
 function getUserById(id) {
-  function request() { return { type: userConstants.GETALL_REQUEST }; }
-  function success(users) { return { type: userConstants.GETALL_SUCCESS, users }; }
-  function failure(error) { return { type: userConstants.GETALL_FAILURE, error }; }
+  function request() { return { type: userConstants.GET_USER_FETCHING }; }
+  function success(user) { return { type: userConstants.GET_USER_SUCCESS, user }; }
+  function failure(error) { return { type: userConstants.GET_USER_FAILURE, error }; }
 
   return (dispatch) => {
     dispatch(request({ id }));

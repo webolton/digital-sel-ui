@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { userActions } from 'actions/user.actions';
+import { userActions } from 'actions/userActions';
 import fetchMock from 'fetch-mock';
 
 const API_URL = 'http://localhost:4000';
