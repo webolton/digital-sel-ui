@@ -174,8 +174,8 @@ class ShowUserPage extends React.Component {
                         />
                       </CardBody>
                       <CardFooter className={classes.cardFooter}>
-                        <Button simple color="primary" size="lg" type="submit">
-                          Update Account
+                        <Button simple color="success" size="lg" type="submit">
+                          update profile
                         </Button>
                       </CardFooter>
                     </form>

@@ -12,21 +12,26 @@
 
  */
 
-// =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^=
-//                            COLORS                             //
-// =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^=
+// =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^= //
+//                             COLORS                               //
+// =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^= //
 
-// Blues
+// Blues -- Primary
 const lochmaraBlue = '#336FAF';   // Primary
 const darkCerulean = '#005794';   // Dark version of Primary
 const darkerCerulean = '#003961'; // Darker version of primary
+
+// Greens -- Secondary
+const limeGreen = '#39C380';
+
 const darkRed = '#AF3533';
-const tangerine = '#F08700'
+const tangerine = '#F08700';
 
 const primaryColor = lochmaraBlue;
+const secondaryColor = limeGreen;
 const warningColor = '#ff9800';
 const dangerColor = darkRed;
-const successColor = '#4caf50';
+const successColor = limeGreen;
 const infoColor = '#00acc1';
 const roseColor = '#336FAF';
 const grayColor = '#999999';
@@ -198,6 +203,7 @@ export {
   darkerCerulean,
   tangerine,
   primaryColor,
+  secondaryColor,
   warningColor,
   dangerColor,
   successColor,
