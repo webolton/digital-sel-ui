@@ -2,20 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { primaryColor } from 'assets/javascripts/digital-sel-ui';
+import { darkCerulean } from 'assets/javascripts/digital-sel-ui';
 
 const styles = {
   root: {
-    flexGrow: 1,
+    marginTop: '80px',
+    textAlign: 'center',
   },
-  primary: primaryColor,
+  linearColorPrimary: {
+    backgroundColor: '#FFFFFF',
+  },
+  linearBarColorPrimary: {
+    backgroundColor: darkCerulean,
+  },
 };
 
 function Progress(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <LinearProgress color="primary" />
+      <LinearProgress
+        classes={{
+          colorPrimary: classes.linearColorPrimary,
+          barColorPrimary: classes.linearBarColorPrimary,
+        }}
+      />
+      <h2>Loading</h2>
     </div>
   );
 }
