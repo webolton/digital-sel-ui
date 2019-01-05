@@ -17,8 +17,9 @@
 // =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^=
 
 // Blues
-const lochmaraBlue = '#336FAF'; // Primary
-const darkCerulean = '#005794'; // Dark Version of Primary
+const lochmaraBlue = '#336FAF';   // Primary
+const darkCerulean = '#005794';   // Dark version of Primary
+const darkerCerulean = '#003961'; // Darker version of primary
 const darkRed = '#AF3533';
 const tangerine = '#F08700'
 
@@ -193,6 +194,9 @@ export {
   boxShadow,
   card,
   defaultFont,
+  darkCerulean,
+  darkerCerulean,
+  tangerine,
   primaryColor,
   warningColor,
   dangerColor,
