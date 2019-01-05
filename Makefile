@@ -1,6 +1,13 @@
 #!/bin/bash
 
-.PHONY : lint
+.PHONY : run
+run:
+	yarn start
 
-lint:
+.PHONY : test
+test:
+	yarn test
+
+.PHONY : lint
+lint-all:
 	yarn eslint 'src/**/*'
