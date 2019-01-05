@@ -27,10 +27,8 @@ function HeaderLinks({ ...props }) {
   ));
   return (
     <List className={classes.list}>
-      { isNil(currentUser) ? <LogInButton /> : null }
-      <ListItem className={classes.listItem}>
-        { !isNil(currentUser)
-          && (
+      { isNil(currentUser) ? <LogInButton /> : (
+        <ListItem className={classes.listItem}>
           <CustomDropdown
             noLiPadding
             buttonText={`${currentUser.first_name} ${currentUser.last_name}`}
@@ -47,9 +45,9 @@ function HeaderLinks({ ...props }) {
               </Link>,
             ]}
           />
-          )
-        }
-      </ListItem>
+        </ListItem>
+      )
+      }
     </List>
   );
 }
