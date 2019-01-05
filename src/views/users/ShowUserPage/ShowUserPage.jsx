@@ -19,34 +19,57 @@ import CustomInput from 'components/CustomInput/CustomInput';
 import showUserPageStyle from 'assets/javascripts/views/users/showUserPageStyle';
 import Progress from 'components/Progress';
 
+const mapStateToProps = store => ({
+  user: store.user,
+  currentUser: store.authentication,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getUser: (userId) => {
+    dispatch(userActions.fetchUser(userId));
+  },
+});
+
 class ShowUserPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       submitted: false,
-      cardAnimaton: 'cardHidden',
+      user: {
+        firstName: this.props.user.firstName,
+        lastName: this.props.user.lastName,
+        email: this.props.user.email,
+        fetching: this.props.user.fetching,
+        fetched: this.props.user.fetched,
+      },
     };
-
-    const userId = this.props.match.params.id;
-    this.props.dispatch(userActions.getUserById(userId));
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    setTimeout(
-      () => {
-        this.setState({ cardAnimaton: '' });
+    const {
+      match: {
+        params: {
+          userId,
+        },
       },
-      50,
-    );
+      getUser,
+    } = this.props;
+    getUser(userId);
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState(state => ({
+      ...state,
+      user: {
+        ...state.user,
+        [name]: value,
+      },
+    }));
   }
 
   handleSubmit(e) {
@@ -55,9 +78,6 @@ class ShowUserPage extends React.Component {
     this.setState({ submitted: true });
     const { first_name, last_name, email } = this.state;
     const { dispatch } = this.props;
-    if (first_name && last_name && email) {
-
-    }
   }
 
   render() {
@@ -65,12 +85,17 @@ class ShowUserPage extends React.Component {
       classes,
       alert,
       currentUser,
-      user,
       ...rest
     } = this.props;
 
     const {
-      first_name, last_name, email, submitted,
+      user: {
+        fetching,
+        fetched,
+        firstName,
+        lastName,
+        email,
+      },
     } = this.state;
     return (
       <div>
@@ -82,12 +107,12 @@ class ShowUserPage extends React.Component {
           }}
         >
           <div className={classes.container}>
-            { user.loading ? (
+            { fetching ? (
               <Progress />
             ) : (
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4}>
-                  <Card className={classes[this.state.cardAnimaton]}>
+                  <Card>
                     <form className={classes.form} onSubmit={this.handleSubmit}>
                       <CardHeader color="primary" className={classes.cardHeader}>
                         <h4>User Profile</h4>
@@ -101,8 +126,9 @@ class ShowUserPage extends React.Component {
                           }}
                           inputProps={{
                             type: 'text',
-                            name: 'first_name',
-                            value: user.user.first_name,
+                            onChange: this.handleChange,
+                            name: 'firstName',
+                            value: firstName,
                             endAdornment: (
                               <InputAdornment position="end">
                                 <People className={classes.inputIconsColor} />
@@ -118,8 +144,9 @@ class ShowUserPage extends React.Component {
                           }}
                           inputProps={{
                             type: 'text',
-                            name: 'last_name',
-                            value: user.user.last_name,
+                            onChange: this.handleChange,
+                            name: 'lastName',
+                            value: lastName,
                             endAdornment: (
                               <InputAdornment position="end">
                                 <People className={classes.inputIconsColor} />
@@ -137,7 +164,7 @@ class ShowUserPage extends React.Component {
                             type: 'email',
                             onChange: this.handleChange,
                             name: 'email',
-                            value: user.user.email,
+                            value: email,
                             endAdornment: (
                               <InputAdornment position="end">
                                 <Email className={classes.inputIconsColor} />
@@ -164,15 +191,6 @@ class ShowUserPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { authentication, user } = state;
-  const { currentUser } = authentication;
-  return {
-    currentUser,
-    user,
-  };
-}
-
 ShowUserPage.defaultProps = {
   match: {
     id: null,
@@ -182,6 +200,7 @@ ShowUserPage.defaultProps = {
   submitted: false,
   dispatch: {},
   alert: {},
+  getUser: null,
 };
 
 ShowUserPage.propTypes = {
@@ -190,6 +209,7 @@ ShowUserPage.propTypes = {
   },
   classes: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
+  getUser: PropTypes.func,
   rest: PropTypes.object,
   submitted: PropTypes.bool,
   dispatch: PropTypes.func,
@@ -197,4 +217,6 @@ ShowUserPage.propTypes = {
   user: PropTypes.object,
 };
 
-export default connect(mapStateToProps)(withStyles(showUserPageStyle)(ShowUserPage));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(showUserPageStyle)(ShowUserPage),
+);
