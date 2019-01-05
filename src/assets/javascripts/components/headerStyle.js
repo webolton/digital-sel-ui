@@ -1,7 +1,6 @@
 import {
   container,
   defaultFont,
-  primaryColor,
   lightGrayColor,
   transition,
   boxShadow,
