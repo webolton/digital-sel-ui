@@ -1,6 +1,6 @@
 import setAuthToken from './setAuthToken';
 
-function handleResponse(response) {
+const handleResponse = (response) => {
   const authToken = response.headers.get('Authorization');
   return response.text().then(
     (text) => {

@@ -18,7 +18,7 @@ class Routes extends React.Component {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/logout" component={LogoutPage} />
         <Route exact path="/sign-up" component={SignUpPage} />
-        <PrivateRoute exact path="/users/:id" component={ShowUserPage} isLoggedIn={!isNil(currentUser)} />
+        <PrivateRoute exact path="/users/:userId" component={ShowUserPage} isLoggedIn={!isNil(currentUser)} />
         <Route component={NotFoundPage} />
       </Switch>
     );

@@ -50,7 +50,9 @@ function getUserById(id) {
     headers: authHeader(),
   };
 
-  return fetch(`${API_URL}/users/${id}`, requestOptions).then(handleResponse);
+  return fetch(`${API_URL}/users/${id}`, requestOptions).then(response => response).catch((error) => {
+    throw error
+  });
 }
 
 const userService = {

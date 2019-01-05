@@ -1,24 +1,34 @@
-import userConstants from 'constants/userConstants';
-
-const user = (state = {}, action) => {
+export default function reducer(state = {
+  user: {},
+}, action) {
   switch (action.type) {
-    case userConstants.GET_USER_FETCHING:
+    case 'FETCHING_USER': {
       return {
-        loading: true,
-        loaded: false,
+        ...state,
+        fetching: true,
+        fetched: false,
       };
-    case userConstants.GET_USER_SUCCESS:
+    }
+    case 'GET_USER_SUCCESS': {
       return {
-        loading: false,
-        user: action.user,
+        ...state,
+        fetching: false,
+        fetched: true,
+        firstName: action.payload.user.first_name,
+        lastName: action.payload.user.last_name,
+        email: action.payload.user.email,
       };
-    case userConstants.GET_USER_FAILURE:
+    }
+    case 'GET_USER_FAILURE': {
       return {
-        error: action.error,
+        ...state,
+        fetching: false,
+        fetched: false,
+        team: null,
+        error: action.payload,
       };
+    }
     default:
       return state;
   }
 };
-
-export default user;

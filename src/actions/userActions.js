@@ -2,6 +2,7 @@ import history from 'store/history';
 import userConstants from 'constants/userConstants';
 import userService from 'services/userService';
 import { alertActions } from '.';
+import handleResponse from './handleResponse';
 
 function login(email, password) {
   function request(currentUser) { return { type: userConstants.USER_LOGIN_REQUEST }; }
@@ -30,7 +31,7 @@ function logout() {
     .then(
       history.push('/'),
     );
-  return { type: userConstants.LOGOUT };
+  return { type: userConstants.LOGOUT_USER };
 }
 
 function getAllUsers() {
@@ -48,25 +49,16 @@ function getAllUsers() {
   };
 }
 
-function getUserById(id) {
-  function request() { return { type: userConstants.GET_USER_FETCHING }; }
-  function success(user) { return { type: userConstants.GET_USER_SUCCESS, user }; }
-  function failure(error) { return { type: userConstants.GET_USER_FAILURE, error }; }
+function fetchUser(id) {
+  function request() { return { type: userConstants.FETCHING_USER }; }
+  function success(response) { return { type: userConstants.GET_USER_SUCCESS, payload: response }; }
+  function failure(response) { return { type: userConstants.GETALL_FAILURE, payload: response }; }
 
   return (dispatch) => {
-    dispatch(request({ id }));
-
-    userService.getUserById(id)
-      .then(
-        (userData) => {
-          const { user } = userData;
-          dispatch(success(user));
-        },
-        (error) => {
-          dispatch(failure(error));
-          dispatch(alertActions.error(error));
-        },
-      );
+    dispatch(request());
+    return userService.getUserById(id).then((response) => {
+      handleResponse(success, failure, response, dispatch);
+    }).catch((error) => { throw (error); });
   };
 }
 
@@ -96,7 +88,7 @@ const userActions = {
   login,
   logout,
   getAllUsers,
-  getUserById,
+  fetchUser,
   updateUser,
 };
 
