@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import history from 'store/history';
 import Routes from 'routes';
 import withStyles from '@material-ui/core/styles/withStyles';
-import headerStyle from 'assets/javascripts/components/headerStyle';
+import appStyles from 'assets/javascripts/views/appStyles';
 import Header from 'components/Header';
 import HeaderLinks from 'components/Header/HeaderLinks';
 import Transition from 'react-transition-group/Transition';
