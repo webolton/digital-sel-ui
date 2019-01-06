@@ -1,4 +1,3 @@
-import React from 'react';
 import { primaryColor, secondaryColor } from 'assets/javascripts/digital-sel-ui';
 import { createMuiTheme } from '@material-ui/core/styles';
 
