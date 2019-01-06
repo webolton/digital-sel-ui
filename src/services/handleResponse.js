@@ -13,6 +13,6 @@ const handleResponse = (response) => {
       return data;
     },
   );
-}
+};
 
 export default handleResponse;

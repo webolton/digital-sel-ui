@@ -8,14 +8,14 @@ class LogoutPage extends React.Component {
   }
 
   render() {
-    return null
+    return null;
   }
 }
 
 function mapStateToProps(state) {
   const { loggingOut } = state.authentication;
   return {
-    loggingOut
+    loggingOut,
   };
 }
 

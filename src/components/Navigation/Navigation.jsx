@@ -3,27 +3,25 @@ import { connect } from 'react-redux';
 import undefinedOrNull from '../../utilities';
 
 class Navigation extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
   }
 
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
     });
   }
 
   render() {
     const { currentUser } = this.props;
     return (
-      <div>
-      </div>
+      <div />
     );
   }
 }
@@ -32,7 +30,7 @@ function mapStateToProps(state) {
   const { authentication } = state;
   const { currentUser } = authentication;
   return {
-    currentUser
+    currentUser,
   };
 }
 

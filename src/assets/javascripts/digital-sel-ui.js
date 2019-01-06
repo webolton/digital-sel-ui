@@ -17,8 +17,8 @@
 // =^..^=   =^..^=   =^..^=    =^..^=    =^..^=    =^..^=    =^..^= //
 
 // Blues -- Primary
-const lochmaraBlue = '#336FAF';   // Primary
-const darkCerulean = '#005794';   // Dark version of Primary
+const lochmaraBlue = '#336FAF'; // Primary
+const darkCerulean = '#005794'; // Dark version of Primary
 const darkerCerulean = '#003961'; // Darker version of primary
 
 // Greens -- Secondary

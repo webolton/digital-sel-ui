@@ -7,8 +7,7 @@ class HomePage extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div style={{height: "3000px"}}>
-      </div>
+      <div style={{ height: '3000px' }} />
     );
   }
 }

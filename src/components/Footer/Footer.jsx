@@ -1,20 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import { List, ListItem, withStyles } from "@material-ui/core";
-import Favorite from "@material-ui/icons/Favorite";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { List, ListItem, withStyles } from '@material-ui/core';
+import Favorite from '@material-ui/icons/Favorite';
 
-import footerStyle from "assets/javascripts/components/footerStyle";
+import footerStyle from 'assets/javascripts/components/footerStyle';
 
 function Footer({ ...props }) {
   const { classes, whiteFont } = props;
   const footerClasses = classNames({
     [classes.footer]: true,
-    [classes.footerWhiteFont]: whiteFont
+    [classes.footerWhiteFont]: whiteFont,
   });
   const aClasses = classNames({
     [classes.a]: true,
-    [classes.footerWhiteFont]: whiteFont
+    [classes.footerWhiteFont]: whiteFont,
   });
   return (
     <footer className={footerClasses}>
@@ -60,15 +60,24 @@ function Footer({ ...props }) {
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
+          &copy;
+          {' '}
+          {1900 + new Date().getYear()}
+          {' '}
+, made with
+          {' '}
+          <Favorite className={classes.icon} />
+          {' '}
+by
+          {' '}
           <a
             href="https://www.creative-tim.com"
             className={aClasses}
             target="_blank"
           >
             Creative Tim
-          </a>{" "}
+          </a>
+          {' '}
           for a better web.
         </div>
       </div>
@@ -78,7 +87,7 @@ function Footer({ ...props }) {
 
 Footer.propTypes = {
   classes: PropTypes.object.isRequired,
-  whiteFont: PropTypes.bool
+  whiteFont: PropTypes.bool,
 };
 
 export default withStyles(footerStyle)(Footer);

@@ -65,7 +65,7 @@ function fetchUser(id) {
 function updateUser(userId, userData) {
   function request(user) { return { type: userConstants.FETCHING_UPDATE_USER, payload: user }; }
   function success(user) { return { type: userConstants.UPDATE_USER_SUCCESS, payload: user }; }
-  function failure(error) { return { type: userConstants.UPDATE_USER_FAILURE,  payload: error }; }
+  function failure(error) { return { type: userConstants.UPDATE_USER_FAILURE, payload: error }; }
 
   return (dispatch) => {
     dispatch(request(userData));
