@@ -62,25 +62,17 @@ function fetchUser(id) {
   };
 }
 
-function updateUser(userData) {
-  function request(user) { return { type: userConstants.UPDATE_REQUEST, user }; }
-  function success(user) { return { type: userConstants.UPDATE_SUCCESS, user }; }
-  function failure(error) { return { type: userConstants.UPDATE_FAILURE, error }; }
+function updateUser(userId, userData) {
+  function request(user) { return { type: userConstants.FETCHING_UPDATE_USER, payload: user }; }
+  function success(user) { return { type: userConstants.UPDATE_USER_SUCCESS, payload: user }; }
+  function failure(error) { return { type: userConstants.UPDATE_USER_FAILURE,  payload: error }; }
 
   return (dispatch) => {
     dispatch(request(userData));
 
-    userService.updateUser(userData)
-      .then(
-        (user) => {
-          dispatch(success(user));
-          history.push('/');
-        },
-        (error) => {
-          dispatch(failure(error));
-          dispatch(alertActions.error(error));
-        },
-      );
+    return userService.updateUser(userId, userData).then((response) => {
+      handleResponse(success, failure, response, dispatch);
+    }).catch((error) => { throw (error); });
   };
 }
 

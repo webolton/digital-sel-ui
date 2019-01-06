@@ -28,6 +28,9 @@ const mapDispatchToProps = dispatch => ({
   getUser: (userId) => {
     dispatch(userActions.fetchUser(userId));
   },
+  updateUser: (userId, userData) => {
+    dispatch(userActions.updateUser(userId, userData));
+  },
 });
 
 class ShowUserPage extends React.Component {
@@ -37,6 +40,7 @@ class ShowUserPage extends React.Component {
     this.state = {
       submitted: false,
       user: {
+        userId: this.props.user.userId,
         firstName: this.props.user.firstName,
         lastName: this.props.user.lastName,
         email: this.props.user.email,
@@ -72,12 +76,15 @@ class ShowUserPage extends React.Component {
     }));
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
+    const { updateUser } = this.props;
     e.preventDefault();
-
     this.setState({ submitted: true });
-    const { first_name, last_name, email } = this.state;
-    const { dispatch } = this.props;
+    const {
+      userId, firstName, lastName, email,
+    } = this.state.user;
+    const userData = { user: { first_name: firstName, last_name: lastName, email } };
+    updateUser(userId, userData);
   }
 
   render() {
@@ -97,6 +104,9 @@ class ShowUserPage extends React.Component {
         email,
       },
     } = this.state;
+    if (fetching) {
+      return <Progress message="Loading" />;
+    }
     return (
       <div>
         <div
@@ -107,81 +117,89 @@ class ShowUserPage extends React.Component {
           }}
         >
           <div className={classes.container}>
-            { fetching ? (
-              <Progress />
-            ) : (
-              <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={4}>
-                  <Card>
-                    <form className={classes.form} onSubmit={this.handleSubmit}>
-                      <CardHeader color="primary" className={classes.cardHeader}>
+            <GridContainer justify="center">
+              <GridItem xs={12} sm={12} md={4}>
+                <Card>
+                  <form className={classes.form} onSubmit={this.handleSubmit}>
+                    <CardHeader color="primary" className={classes.cardHeader}>
                         <h4>User Profile</h4>
                       </CardHeader>
-                      <CardBody>
+                    <CardBody>
                         <CustomInput
-                          labelText="First Name"
-                          id="firstName"
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                          inputProps={{
-                            type: 'text',
-                            onChange: this.handleChange,
-                            name: 'firstName',
-                            value: firstName,
-                            endAdornment: (
-                              <InputAdornment position="end">
+                              labelText="First Name"
+                              id="firstName"
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              inputProps={{
+                                type: 'text',
+                                onChange: this.handleChange,
+                                name: 'firstName',
+                                value: firstName,
+                                endAdornment: (
+                                  <InputAdornment position="end">
                                 <People className={classes.inputIconsColor} />
                               </InputAdornment>
-                            ),
-                          }}
-                        />
+                                ),
+                              }}
+                            />
                         <CustomInput
-                          labelText="Last Name"
-                          id="lastName"
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                          inputProps={{
-                            type: 'text',
-                            onChange: this.handleChange,
-                            name: 'lastName',
-                            value: lastName,
-                            endAdornment: (
-                              <InputAdornment position="end">
+                              labelText="Last Name"
+                              id="lastName"
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              inputProps={{
+                                type: 'text',
+                                onChange: this.handleChange,
+                                name: 'lastName',
+                                value: lastName,
+                                endAdornment: (
+                                  <InputAdornment position="end">
                                 <People className={classes.inputIconsColor} />
                               </InputAdornment>
-                            ),
-                          }}
-                        />
+                                ),
+                              }}
+                            />
                         <CustomInput
-                          labelText="Email"
-                          id="email"
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                          inputProps={{
-                            type: 'email',
-                            onChange: this.handleChange,
-                            name: 'email',
-                            value: email,
-                            endAdornment: (
-                              <InputAdornment position="end">
+                              labelText="Email"
+                              id="email"
+                              formControlProps={{
+                                fullWidth: true,
+                              }}
+                              inputProps={{
+                                type: 'email',
+                                onChange: this.handleChange,
+                                name: 'email',
+                                value: email,
+                                endAdornment: (
+                                  <InputAdornment position="end">
                                 <Email className={classes.inputIconsColor} />
                               </InputAdornment>
-                            ),
-                          }}
-                        />
+                                ),
+                              }}
+                            />
                       </CardBody>
-                      <CardFooter className={classes.cardFooter}>
-                        <Button simple color="success" size="lg" type="submit">
+                    <CardFooter className={classes.cardFooter}>
+                        <Button
+                              simple
+                              color="success"
+                              size="lg"
+                              type="submit"
+                              handleClick={this.handleSubmit}
+                            >
                           update profile
-                        </Button>
+                            </Button>
                       </CardFooter>
-                    </form>
-                  </Card>
-                </GridItem>
-              </GridContainer>
+                    <CardFooter className={classes.cardFooter}>
+                        <Button simple color="danger" size="lg" type="submit">
+                          change password
+                            </Button>
+                      </CardFooter>
+                  </form>
+                </Card>
+              </GridItem>
+            </GridContainer>
             )
           }
           </div>

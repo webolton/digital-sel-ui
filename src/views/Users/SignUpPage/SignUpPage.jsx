@@ -85,7 +85,7 @@ class SignUpPage extends React.Component {
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form} onSubmit={this.handleSubmit}>
                     <CardHeader color="primary" className={classes.cardHeader}>
-                      <h4>Login</h4>
+                      <h4>Sign Up</h4>
                     </CardHeader>
                     <CardBody>
                       {alert.message
@@ -110,7 +110,7 @@ class SignUpPage extends React.Component {
                       />
                       <CustomInput
                         labelText="Password"
-                        id="pass"
+                        id="passwrd"
                         formControlProps={{
                           fullWidth: true,
                         }}
@@ -118,6 +118,23 @@ class SignUpPage extends React.Component {
                           type: 'password',
                           onChange: this.handleChange,
                           name: 'password',
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Lock className={classes.inputIconsColor} />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <CustomInput
+                        labelText="Password Confirmation"
+                        id="passwrd-confirmation"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          type: 'password',
+                          onChange: this.handleChange,
+                          name: 'passwordConfirmation',
                           endAdornment: (
                             <InputAdornment position="end">
                               <Lock className={classes.inputIconsColor} />
@@ -156,6 +173,7 @@ SignUpPage.defaultProps = {
   rest: {},
   email: '',
   password: '',
+  passwordConfirmation: '',
   submitted: false,
   dispatch: {},
   alert: {},
@@ -167,6 +185,7 @@ SignUpPage.propTypes = {
   rest: PropTypes.object,
   email: PropTypes.string,
   password: PropTypes.string,
+  passwordConfirmation: PropTypes.string,
   submitted: PropTypes.bool,
   dispatch: PropTypes.func,
   alert: PropTypes.object,
