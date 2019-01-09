@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<HeaderLinks /> render() when there is no currentUser renders the component 1`] = `
+exports['<HeaderLinks /> render() when there is no currentUser renders the component 1'] = `
 <HeaderLinks
   classes={
     Object {

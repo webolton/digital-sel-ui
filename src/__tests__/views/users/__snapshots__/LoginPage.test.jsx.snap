@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LoginPage /> render() renders the component 1`] = `
+exports['<LoginPage /> render() renders the component 1'] = `
 <LoginPage
   alert={Object {}}
   classes={

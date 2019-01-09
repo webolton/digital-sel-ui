@@ -9,6 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import appStyles from 'assets/javascripts/views/appStyles';
 import Header from 'components/Header';
 import HeaderLinks from 'components/Header/HeaderLinks';
+import Transition from 'react-transition-group/Transition';
 import { alertActions } from 'actions';
 
 const duration = 300;
@@ -88,4 +89,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(withStyles(headerStyle)(App)));
+export default withRouter(connect(mapStateToProps)(withStyles(appStyles)(App)));

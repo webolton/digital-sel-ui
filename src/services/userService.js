@@ -51,15 +51,28 @@ function getUserById(id) {
   };
 
   return fetch(`${API_URL}/users/${id}`, requestOptions).then(response => response).catch((error) => {
-    throw error
+    throw error;
   });
 }
+
+const updateUser = (userId, userData) => {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: authHeader(),
+    body: JSON.stringify(userData),
+  };
+  console.log(requestOptions);
+  return fetch(`${API_URL}/users/${userId}`, requestOptions).then(response => response).catch((error) => {
+    throw error;
+  });
+};
 
 const userService = {
   login,
   logout,
   getAllUsers,
   getUserById,
+  updateUser,
 };
 
 export default userService;

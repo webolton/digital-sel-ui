@@ -14,10 +14,7 @@ export default function reducer(state = {
         ...state,
         fetching: false,
         fetched: true,
-        userId: action.payload.user.id,
-        firstName: action.payload.user.first_name,
-        lastName: action.payload.user.last_name,
-        email: action.payload.user.email,
+        user: action.payload,
       };
     }
     case 'GET_USER_FAILURE': {
@@ -62,4 +59,4 @@ export default function reducer(state = {
     default:
       return state;
   }
-};
+}
