@@ -33,7 +33,7 @@ export class App extends React.Component {
       classes, currentUser, ...rest
     } = this.props;
     return (
-      <div>
+      <div className={classes.mainRaised}>
         <Header
           color="lightGray"
           routes={dashboardRoutes}
@@ -57,4 +57,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(withStyles(appStyles)(App)));
+export default withTransition(withRouter(connect(mapStateToProps)(withStyles(appStyles)(App))));
