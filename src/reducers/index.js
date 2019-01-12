@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form'
 import home from './home.reducer';
 import authentication from './authenticationReducer';
 import users from './usersReducer';
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   user,
   alert,
   home,
+  form: formReducer,
 });
 
 export default rootReducer;

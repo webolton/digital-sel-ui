@@ -5,9 +5,13 @@ import { connect } from 'react-redux';
 import userActions from 'actions/userActions';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import People from '@material-ui/icons/People';
-import Email from '@material-ui/icons/Email';
+import { Field, reduxForm } from 'redux-form';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import asyncValidate from 'components/helpers/asyncValidate';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
@@ -19,32 +23,62 @@ import CustomInput from 'components/CustomInput/CustomInput';
 import showUserPageStyle from 'assets/javascripts/views/users/showUserPageStyle';
 import Progress from 'components/Progress';
 
-const mapStateToProps = store => ({
-  user: store.user,
-  currentUser: store.authentication,
-});
+const validate = (values) => {
+  const errors = {};
+  const requiredFields = [
+    'firstName',
+    'lastName',
+    'email',
+  ];
+  requiredFields.forEach((field) => {
+    if (!values[field]) {
+      errors[field] = 'Required';
+    }
+  });
+  if (
+    values.email
+    && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+  ) {
+    errors.email = 'Invalid email address';
+  }
+  return errors;
+};
 
-const mapDispatchToProps = dispatch => ({
-  getUser: (userId) => {
-    dispatch(userActions.fetchUser(userId));
-  },
-  updateUser: (userId, userData) => {
-    dispatch(userActions.updateUser(userId, userData));
-  },
-});
+const renderTextField = ({
+  label,
+  input,
+  meta: { touched, invalid, error },
+  ...custom
+}) => (
+  <TextField
+    label={label}
+    placeholder={label}
+    error={touched && invalid}
+    helperText={touched && error}
+    {...input}
+    {...custom}
+  />
+);
+
+const renderFromHelper = ({ touched, error }) => {
+  if (!(touched && error)) {
+
+  } else {
+    return <FormHelperText>{touched && error}</FormHelperText>;
+  }
+};
 
 class ShowUserPage extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      submitted: false,
       user: {
-        user: this.props,
+        first_name: '',
+        last_name: '',
+        email: '',
       },
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -60,17 +94,6 @@ class ShowUserPage extends React.Component {
     getUser(userId);
   }
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState(state => ({
-      ...state,
-      user: {
-        ...state.user,
-        [name]: value,
-      },
-    }));
-  }
-
   handleSubmit = (e) => {
     const { updateUser } = this.props;
     e.preventDefault();
@@ -82,134 +105,95 @@ class ShowUserPage extends React.Component {
     updateUser(userId, userData);
   }
 
+  handleInitialize = () => {
+    if (this.props.user.user.user) {
+      const initData = {
+        firstName: this.props.user.user.user.first_name,
+        lastName: this.props.user.user.user.last_name,
+        email: this.props.user.user.user.email,
+      }
+      this.props.initialize(initData);
+    }
+  }
+
   render() {
     const {
       user: {
-        user: {
-          user,
-        },
         fetching,
         fetched,
       },
       classes,
-      alert,
-      currentUser,
-      ...rest
+      pristine,
+      submitting,
     } = this.props;
-
-    console.log("before!!!")
-    console.log(user.user)
-    console.log("after!!!!")
-
-    const firstName = user.first_name;
-    const lastName = user.last_name;
-    const email = user.email;
 
     if (fetching) {
       return <Progress message="Loading" />;
     }
 
     if (fetched) {
-    return (
-      <div>
-        <div
-          className={classes.pageHeader}
-          style={{
-            backgroundSize: 'cover',
-            backgroundPosition: 'top center',
-          }}
-        >
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
-                <Card>
-                  <form className={classes.form} onSubmit={this.handleSubmit}>
-                    <CardHeader color="primary" className={classes.cardHeader}>
-                      <h4>User Profile</h4>
-                    </CardHeader>
-                    <CardBody>
-                      <CustomInput
-                        labelText="First Name"
-                        id="firstName"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: 'text',
-                          onChange: this.handleChange,
-                          name: 'firstName',
-                          value: firstName,
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <People className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Last Name"
-                        id="lastName"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: 'text',
-                          onChange: this.handleChange,
-                          name: 'lastName',
-                          value: lastName,
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <People className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Email"
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: 'email',
-                          onChange: this.handleChange,
-                          name: 'email',
-                          value: email,
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    </CardBody>
-                    <CardFooter className={classes.cardFooter}>
-                      <Button
-                        simple
-                        color="success"
-                        size="lg"
-                        type="submit"
-                        handleClick={this.handleSubmit}
-                      >
+      return (
+        <div>
+          <div
+            className={classes.pageHeader}
+            style={{
+              backgroundSize: 'cover',
+              backgroundPosition: 'top center',
+            }}
+          >
+            <div className={classes.container}>
+              <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={4}>
+                  <Card>
+                    <form className={classes.form} onSubmit={this.handleSubmit}>
+                      <CardHeader color="primary" className={classes.cardHeader}>
+                        <h4>User Profile</h4>
+                      </CardHeader>
+                      <CardBody>
+                        <Field
+                          name="first_name"
+                          label="First Name"
+                          id="firstName"
+                          component={renderTextField}
+                        />
+                        <Field
+                          name="last_name"
+                          label="Last Name"
+                          id="lastName"
+                          component={renderTextField}
+                        />
+                        <Field
+                          name="email"
+                          label="Email"
+                          id="email"
+                          component={renderTextField}
+                        />
+                      </CardBody>
+                      <CardFooter className={classes.cardFooter}>
+                        <Button
+                          simple
+                          color="success"
+                          size="lg"
+                          type="submit"
+                          disabled={pristine || submitting}
+                        >
                           update profile
-                      </Button>
-                    </CardFooter>
-                    <CardFooter className={classes.cardFooter}>
-                      <Button simple color="danger" size="lg" type="submit">
+                        </Button>
+                      </CardFooter>
+                      <CardFooter className={classes.cardFooter}>
+                        <Button simple color="danger" size="lg" type="submit">
                           change password
-                      </Button>
-                    </CardFooter>
-                  </form>
-                </Card>
-              </GridItem>
-            </GridContainer>
-            )
-          }
+                        </Button>
+                      </CardFooter>
+                    </form>
+                  </Card>
+                </GridItem>
+              </GridContainer>
+            </div>
           </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
   }
 }
 
@@ -219,7 +203,6 @@ ShowUserPage.defaultProps = {
   },
   user: null,
   rest: {},
-  submitted: false,
   dispatch: {},
   alert: {},
   getUser: null,
@@ -233,12 +216,28 @@ ShowUserPage.propTypes = {
   currentUser: PropTypes.object.isRequired,
   getUser: PropTypes.func,
   rest: PropTypes.object,
-  submitted: PropTypes.bool,
   dispatch: PropTypes.func,
   alert: PropTypes.object,
   user: PropTypes.object,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(showUserPageStyle)(ShowUserPage),
-);
+ShowUserPage = reduxForm({
+  form: 'ShowUserPage',
+  validate,
+  asyncValidate,
+  enableReinitialize: true,
+})(ShowUserPage)
+
+ShowUserPage = connect(
+  state => ({
+    initialValues: state.user.user.user,
+    user: state.user,
+    currentUser: state.authentication,
+  }),
+  {
+    getUser: userActions.fetchUser,
+    updateUser: userActions.updateUser,
+  }
+)(ShowUserPage)
+
+export default withStyles(showUserPageStyle)(ShowUserPage);
