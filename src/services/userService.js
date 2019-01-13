@@ -61,7 +61,6 @@ const updateUser = (userId, userData) => {
     headers: authHeader(),
     body: JSON.stringify(userData),
   };
-  console.log(requestOptions);
   return fetch(`${API_URL}/users/${userId}`, requestOptions).then(response => response).catch((error) => {
     throw error;
   });
