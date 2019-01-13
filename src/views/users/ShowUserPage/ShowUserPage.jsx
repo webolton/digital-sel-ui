@@ -26,8 +26,8 @@ import Progress from 'components/Progress';
 const validate = (values) => {
   const errors = {};
   const requiredFields = [
-    'firstName',
-    'lastName',
+    'first_name',
+    'last_name',
     'email',
   ];
   requiredFields.forEach((field) => {
@@ -79,7 +79,7 @@ class ShowUserPage extends React.Component {
       },
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitUpdate = this.submitUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -94,26 +94,17 @@ class ShowUserPage extends React.Component {
     getUser(userId);
   }
 
-  handleSubmit = (e) => {
-    const { updateUser } = this.props;
-    e.preventDefault();
-    this.setState({ submitted: true });
+  submitUpdate = values => {
     const {
-      userId, firstName, lastName, email,
-    } = this.state.user;
-    const userData = { user: { first_name: firstName, last_name: lastName, email } };
+      match: {
+        params: {
+          userId,
+        },
+      },
+      updateUser,
+    } = this.props;
+    const userData = { user: values };
     updateUser(userId, userData);
-  }
-
-  handleInitialize = () => {
-    if (this.props.user.user.user) {
-      const initData = {
-        firstName: this.props.user.user.user.first_name,
-        lastName: this.props.user.user.user.last_name,
-        email: this.props.user.user.user.email,
-      }
-      this.props.initialize(initData);
-    }
   }
 
   render() {
@@ -123,6 +114,8 @@ class ShowUserPage extends React.Component {
         fetched,
       },
       classes,
+      error,
+      handleSubmit,
       pristine,
       submitting,
     } = this.props;
@@ -145,7 +138,7 @@ class ShowUserPage extends React.Component {
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4}>
                   <Card>
-                    <form className={classes.form} onSubmit={this.handleSubmit}>
+                    <form className={classes.form} onSubmit={handleSubmit(val => this.submitUpdate(val))}>
                       <CardHeader color="primary" className={classes.cardHeader}>
                         <h4>User Profile</h4>
                       </CardHeader>
@@ -155,6 +148,7 @@ class ShowUserPage extends React.Component {
                           label="First Name"
                           id="firstName"
                           component={renderTextField}
+                          className="testClass"
                         />
                         <Field
                           name="last_name"
@@ -224,7 +218,6 @@ ShowUserPage.propTypes = {
 ShowUserPage = reduxForm({
   form: 'ShowUserPage',
   validate,
-  asyncValidate,
   enableReinitialize: true,
 })(ShowUserPage)
 
