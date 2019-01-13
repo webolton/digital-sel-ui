@@ -61,11 +61,10 @@ const renderTextField = ({
 );
 
 const renderFromHelper = ({ touched, error }) => {
-  if (!(touched && error)) {
-
-  } else {
+  if (touched && error) {
     return <FormHelperText>{touched && error}</FormHelperText>;
   }
+  return null;
 };
 
 class ShowUserPage extends React.Component {
@@ -94,7 +93,7 @@ class ShowUserPage extends React.Component {
     getUser(userId);
   }
 
-  submitUpdate = values => {
+  submitUpdate = (values) => {
     const {
       match: {
         params: {
@@ -200,6 +199,8 @@ ShowUserPage.defaultProps = {
   dispatch: {},
   alert: {},
   getUser: null,
+  touched: false,
+  error: false,
 };
 
 ShowUserPage.propTypes = {
@@ -213,13 +214,15 @@ ShowUserPage.propTypes = {
   dispatch: PropTypes.func,
   alert: PropTypes.object,
   user: PropTypes.object,
+  touched: PropTypes.boolean,
+  error: PropTypes.boolean,
 };
 
 ShowUserPage = reduxForm({
   form: 'ShowUserPage',
   validate,
   enableReinitialize: true,
-})(ShowUserPage)
+})(ShowUserPage);
 
 ShowUserPage = connect(
   state => ({
@@ -230,7 +233,7 @@ ShowUserPage = connect(
   {
     getUser: userActions.fetchUser,
     updateUser: userActions.updateUser,
-  }
-)(ShowUserPage)
+  },
+)(ShowUserPage);
 
 export default withStyles(showUserPageStyle)(ShowUserPage);
