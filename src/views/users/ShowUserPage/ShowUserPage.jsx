@@ -1,17 +1,11 @@
-/* eslint no-unused-vars: 0 */
-
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import userActions from 'actions/userActions';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import asyncValidate from 'components/helpers/asyncValidate';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
@@ -19,7 +13,6 @@ import Card from 'components/Card';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardFooter from 'components/Card/CardFooter';
-import CustomInput from 'components/CustomInput/CustomInput';
 import showUserPageStyle from 'assets/javascripts/views/users/showUserPageStyle';
 import Progress from 'components/Progress';
 
@@ -60,24 +53,9 @@ const renderTextField = ({
   />
 );
 
-const renderFromHelper = ({ touched, error }) => {
-  if (touched && error) {
-    return <FormHelperText>{touched && error}</FormHelperText>;
-  }
-  return null;
-};
-
 class ShowUserPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: {
-        first_name: '',
-        last_name: '',
-        email: '',
-      },
-    };
-
     this.submitUpdate = this.submitUpdate.bind(this);
   }
 
@@ -113,7 +91,6 @@ class ShowUserPage extends React.Component {
         fetched,
       },
       classes,
-      error,
       handleSubmit,
       pristine,
       submitting,
@@ -137,7 +114,10 @@ class ShowUserPage extends React.Component {
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4}>
                   <Card>
-                    <form className={classes.form} onSubmit={handleSubmit(val => this.submitUpdate(val))}>
+                    <form
+                      className={classes.form}
+                      onSubmit={handleSubmit(val => this.submitUpdate(val))}
+                    >
                       <CardHeader color="primary" className={classes.cardHeader}>
                         <h4>User Profile</h4>
                       </CardHeader>
@@ -173,12 +153,12 @@ class ShowUserPage extends React.Component {
                           update profile
                         </Button>
                       </CardFooter>
-                      <CardFooter className={classes.cardFooter}>
-                        <Button simple color="danger" size="lg" type="submit">
-                          change password
-                        </Button>
-                      </CardFooter>
                     </form>
+                    <CardFooter className={classes.cardFooter}>
+                      <Button simple color="danger" size="lg">
+                        change password
+                      </Button>
+                    </CardFooter>
                   </Card>
                 </GridItem>
               </GridContainer>
@@ -187,6 +167,9 @@ class ShowUserPage extends React.Component {
         </div>
       );
     }
+    return (
+      <div />
+    );
   }
 }
 
@@ -195,12 +178,8 @@ ShowUserPage.defaultProps = {
     id: null,
   },
   user: null,
-  rest: {},
-  dispatch: {},
-  alert: {},
-  getUser: null,
-  touched: false,
-  error: false,
+  submitting: false,
+  pristine: false,
 };
 
 ShowUserPage.propTypes = {
@@ -209,31 +188,30 @@ ShowUserPage.propTypes = {
   },
   classes: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
-  getUser: PropTypes.func,
-  rest: PropTypes.object,
-  dispatch: PropTypes.func,
-  alert: PropTypes.object,
+  handleSubmit: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
+  updateUser: PropTypes.isRequired,
   user: PropTypes.object,
-  touched: PropTypes.boolean,
-  error: PropTypes.boolean,
+  submitting: PropTypes.bool,
+  pristine: PropTypes.bool,
 };
 
-ShowUserPage = reduxForm({
-  form: 'ShowUserPage',
-  validate,
-  enableReinitialize: true,
-})(ShowUserPage);
-
-ShowUserPage = connect(
-  state => ({
-    initialValues: state.user.user.user,
-    user: state.user,
-    currentUser: state.authentication,
+export default compose(
+  connect(
+    state => ({
+      initialValues: state.user.user.user,
+      user: state.user,
+      currentUser: state.authentication,
+    }),
+    {
+      getUser: userActions.fetchUser,
+      updateUser: userActions.updateUser,
+    },
+  ),
+  reduxForm({
+    form: 'ShowUserPage',
+    validate,
+    enableReinitialize: true,
   }),
-  {
-    getUser: userActions.fetchUser,
-    updateUser: userActions.updateUser,
-  },
+  withStyles(showUserPageStyle),
 )(ShowUserPage);
-
-export default withStyles(showUserPageStyle)(ShowUserPage);
