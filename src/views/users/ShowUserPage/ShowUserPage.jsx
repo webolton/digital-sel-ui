@@ -96,7 +96,7 @@ class ShowUserPage extends React.Component {
       submitting,
     } = this.props;
 
-    if (fetching) {
+    if (fetching && !fetched) {
       return <Progress message="Loading" />;
     }
 
