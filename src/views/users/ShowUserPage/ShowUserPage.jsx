@@ -40,6 +40,7 @@ const validate = (values) => {
 const renderTextField = ({
   label,
   input,
+  propClasses,
   meta: { touched, invalid, error },
   ...custom
 }) => (
@@ -48,6 +49,26 @@ const renderTextField = ({
     placeholder={label}
     error={touched && invalid}
     helperText={touched && error}
+    InputProps={{
+      classes: {
+        root: propClasses.input,
+        underline: propClasses.underline,
+        error: propClasses.underlineError,
+        disabled: propClasses.disabled,
+      },
+    }}
+    InputLabelProps={{
+      classes: {
+        root: propClasses.labelRoot,
+        error: propClasses.labelRootError,
+      },
+    }}
+    FormHelperTextProps={{
+      classes: {
+        error: propClasses.customHelperTextError,
+        success: propClasses.helperTextSuccess,
+      },
+    }}
     {...input}
     {...custom}
   />
@@ -127,19 +148,33 @@ class ShowUserPage extends React.Component {
                           label="First Name"
                           id="firstName"
                           component={renderTextField}
-                          className="testClass"
+                          fullWidth="true"
+                          propClasses={classes}
+                          classes={{
+                            root: classes.formControl,
+                          }}
                         />
                         <Field
                           name="last_name"
                           label="Last Name"
                           id="lastName"
                           component={renderTextField}
+                          fullWidth="true"
+                          propClasses={classes}
+                          classes={{
+                            root: classes.formControl,
+                          }}
                         />
                         <Field
                           name="email"
                           label="Email"
                           id="email"
                           component={renderTextField}
+                          fullWidth="true"
+                          propClasses={classes}
+                          classes={{
+                            root: classes.formControl,
+                          }}
                         />
                       </CardBody>
                       <CardFooter className={classes.cardFooter}>
