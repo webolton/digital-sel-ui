@@ -22,27 +22,14 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
-    // reset login status
-    // this.props.dispatch(userActions.logout());
-
     this.state = {
       email: '',
       password: '',
       submitted: false,
-      cardAnimaton: 'cardHidden',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    setTimeout(
-      () => {
-        this.setState({ cardAnimaton: '' });
-      },
-      50,
-    );
   }
 
   handleChange(e) {
@@ -82,7 +69,7 @@ class LoginPage extends React.Component {
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={4}>
-                <Card className={classes[this.state.cardAnimaton]}>
+                <Card>
                   <form className={classes.form} onSubmit={this.handleSubmit}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>Login</h4>
