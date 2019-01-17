@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 import userActions from 'actions/userActions';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Lock from '@material-ui/icons/Lock';
-import Email from '@material-ui/icons/Email';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
@@ -88,11 +85,6 @@ class LoginPage extends React.Component {
                           type: 'email',
                           onChange: this.handleChange,
                           name: 'email',
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
                         }}
                       />
                       <CustomInput
@@ -105,11 +97,6 @@ class LoginPage extends React.Component {
                           type: 'password',
                           onChange: this.handleChange,
                           name: 'password',
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Lock className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
                         }}
                       />
                     </CardBody>
