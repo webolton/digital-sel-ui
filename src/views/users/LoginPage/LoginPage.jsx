@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import userActions from 'actions/userActions';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { Field, reduxForm } from 'redux-form';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
@@ -12,8 +14,66 @@ import Card from 'components/Card';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardFooter from 'components/Card/CardFooter';
+import TextField from '@material-ui/core/TextField';
 import CustomInput from 'components/CustomInput/CustomInput';
 import loginPageStyle from 'assets/javascripts/views/users/loginPageStyle';
+
+const validate = (values) => {
+  const errors = {};
+  const requiredFields = [
+    'email',
+    'password',
+  ];
+  requiredFields.forEach((field) => {
+    if (!values[field]) {
+      errors[field] = 'Required';
+    }
+  });
+  if (
+    values.email
+    && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+  ) {
+    errors.email = 'Invalid email address';
+  }
+  return errors;
+};
+
+const renderTextField = ({
+  label,
+  input,
+  propClasses,
+  meta: { touched, invalid, error },
+  ...custom
+}) => (
+  <TextField
+    label={label}
+    placeholder={label}
+    error={touched && invalid}
+    helperText={touched && error}
+    InputProps={{
+      classes: {
+        root: propClasses.input,
+        underline: propClasses.underline,
+        error: propClasses.underlineError,
+        disabled: propClasses.disabled,
+      },
+    }}
+    InputLabelProps={{
+      classes: {
+        root: propClasses.labelRoot,
+        error: propClasses.labelRootError,
+      },
+    }}
+    FormHelperTextProps={{
+      classes: {
+        error: propClasses.customHelperTextError,
+        success: propClasses.helperTextSuccess,
+      },
+    }}
+    {...input}
+    {...custom}
+  />
+);
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -25,7 +85,6 @@ class LoginPage extends React.Component {
       submitted: false,
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -50,6 +109,8 @@ class LoginPage extends React.Component {
       loggingIn,
       classes,
       alert,
+      pristine,
+      submitting,
       ...rest
     } = this.props;
 
@@ -99,6 +160,28 @@ class LoginPage extends React.Component {
                           name: 'password',
                         }}
                       />
+                      <Field
+                        name="email"
+                        label="Email"
+                        id="email"
+                        component={renderTextField}
+                        fullWidth="true"
+                        propClasses={classes}
+                        classes={{
+                          root: classes.formControl,
+                        }}
+                      />
+                      <Field
+                        name="password"
+                        label="Password"
+                        id="password"
+                        component={renderTextField}
+                        fullWidth="true"
+                        propClasses={classes}
+                        classes={{
+                          root: classes.formControl,
+                        }}
+                      />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button simple color="primary" size="lg" type="submit">
@@ -146,5 +229,21 @@ LoginPage.propTypes = {
   alert: PropTypes.object,
 };
 
-
-export default connect(mapStateToProps)(withStyles(loginPageStyle)(LoginPage));
+export default compose(
+  connect(
+    state => ({
+      submitted: false,
+      email: '',
+      password: '',
+    }),
+    {
+      loginUser: userActions.login,
+    },
+  ),
+  reduxForm({
+    form: 'LoginPage',
+    validate,
+    enableReinitialize: true,
+  }),
+  withStyles(loginPageStyle),
+)(LoginPage);
