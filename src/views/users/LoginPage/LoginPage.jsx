@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: 0 */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -15,7 +13,6 @@ import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardFooter from 'components/Card/CardFooter';
 import TextField from '@material-ui/core/TextField';
-import CustomInput from 'components/CustomInput/CustomInput';
 import loginPageStyle from 'assets/javascripts/views/users/loginPageStyle';
 
 const validate = (values) => {
@@ -78,43 +75,23 @@ const renderTextField = ({
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      email: '',
-      password: '',
-      submitted: false,
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitLogin = this.submitLogin.bind(this);
   }
 
-  handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-
-    this.setState({ submitted: true });
-    const { email, password } = this.state;
-    const { dispatch } = this.props;
-    if (email && password) {
-      dispatch(userActions.login(email, password));
-    }
+  submitLogin = (values) => {
+    const { loginUser } = this.props;
+    loginUser(values.email, values.password);
   }
 
   render() {
     const {
-      loggingIn,
       classes,
       alert,
+      handleSubmit,
       pristine,
       submitting,
-      ...rest
     } = this.props;
 
-    const { email, password, submitted } = this.state;
     return (
       <div>
         <div
@@ -128,7 +105,10 @@ class LoginPage extends React.Component {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={4}>
                 <Card>
-                  <form className={classes.form} onSubmit={this.handleSubmit}>
+                  <form
+                    className={classes.form}
+                    onSubmit={handleSubmit(val => this.submitLogin(val))}
+                  >
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>Login</h4>
                     </CardHeader>
@@ -136,36 +116,12 @@ class LoginPage extends React.Component {
                       {alert.message
                         && <p className={classes.unauthorized}>Incorrect email or password.</p>
                       }
-                      <CustomInput
-                        labelText="Email"
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: 'email',
-                          onChange: this.handleChange,
-                          name: 'email',
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Password"
-                        id="pass"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: 'password',
-                          onChange: this.handleChange,
-                          name: 'password',
-                        }}
-                      />
                       <Field
                         name="email"
                         label="Email"
                         id="email"
                         component={renderTextField}
-                        fullWidth="true"
+                        fullWidth
                         propClasses={classes}
                         classes={{
                           root: classes.formControl,
@@ -175,8 +131,9 @@ class LoginPage extends React.Component {
                         name="password"
                         label="Password"
                         id="password"
+                        type="password"
                         component={renderTextField}
-                        fullWidth="true"
+                        fullWidth
                         propClasses={classes}
                         classes={{
                           root: classes.formControl,
@@ -184,8 +141,14 @@ class LoginPage extends React.Component {
                       />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg" type="submit">
-                        Submit
+                      <Button
+                        simple
+                        color="success"
+                        size="lg"
+                        type="submit"
+                        disabled={pristine || submitting}
+                      >
+                        submit
                       </Button>
                     </CardFooter>
                   </form>
@@ -199,42 +162,24 @@ class LoginPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { loggingIn } = state.authentication;
-  const { alert } = state;
-  return {
-    loggingIn,
-    alert,
-  };
-}
-
 LoginPage.defaultProps = {
-  loggingIn: false,
-  rest: {},
-  email: '',
-  password: '',
-  submitted: false,
-  dispatch: {},
   alert: {},
+  pristine: false,
+  submitting: false,
 };
 
 LoginPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  loggingIn: PropTypes.bool,
-  rest: PropTypes.object,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  submitted: PropTypes.bool,
-  dispatch: PropTypes.func,
+  loginUser: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  pristine: PropTypes.bool,
+  submitting: PropTypes.bool,
   alert: PropTypes.object,
 };
 
 export default compose(
   connect(
-    state => ({
-      submitted: false,
-      email: '',
-      password: '',
+    state => ({ // eslint-disable-line no-unused-vars
     }),
     {
       loginUser: userActions.login,
