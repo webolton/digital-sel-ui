@@ -148,7 +148,7 @@ class ShowUserPage extends React.Component {
                           label="First Name"
                           id="firstName"
                           component={renderTextField}
-                          fullWidth="true"
+                          fullWidth={true}
                           propClasses={classes}
                           classes={{
                             root: classes.formControl,
@@ -159,7 +159,7 @@ class ShowUserPage extends React.Component {
                           label="Last Name"
                           id="lastName"
                           component={renderTextField}
-                          fullWidth="true"
+                          fullWidth={true}
                           propClasses={classes}
                           classes={{
                             root: classes.formControl,
@@ -170,7 +170,7 @@ class ShowUserPage extends React.Component {
                           label="Email"
                           id="email"
                           component={renderTextField}
-                          fullWidth="true"
+                          fullWidth={true}
                           propClasses={classes}
                           classes={{
                             root: classes.formControl,
@@ -209,23 +209,20 @@ class ShowUserPage extends React.Component {
 }
 
 ShowUserPage.defaultProps = {
-  match: {
-    id: null,
-  },
   user: null,
   submitting: false,
   pristine: false,
 };
 
 ShowUserPage.propTypes = {
-  match: {
-    id: PropTypes.number.isRequired,
-  },
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
   classes: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
-  updateUser: PropTypes.isRequired,
+  updateUser: PropTypes.func.isRequired,
   user: PropTypes.object,
   submitting: PropTypes.bool,
   pristine: PropTypes.bool,
