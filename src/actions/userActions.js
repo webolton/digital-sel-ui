@@ -5,7 +5,7 @@ import handleResponse from './handleResponse';
 import alertActions from './alertActions';
 
 function login(email, password) {
-  function request(currentUser) { return { type: userConstants.USER_LOGIN_REQUEST }; }
+  function request() { return { type: userConstants.USER_LOGIN_REQUEST }; }
   function success(currentUser) { return { type: userConstants.USER_LOGIN_SUCCESS, currentUser }; }
   function failure(error) { return { type: userConstants.USER_LOGIN_FAILURE, error }; }
 
@@ -16,11 +16,12 @@ function login(email, password) {
       .then(
         (currentUser) => {
           dispatch(success(currentUser));
+          const alertProps = { message: 'Login Success', anchorOrigin: { vertical: 'bottom', horizontal: 'left' }, variant: 'success' };
           history.push('/');
+          dispatch(alertActions.success(alertProps));
         },
         (error) => {
           dispatch(failure(error));
-          dispatch(alertActions.error(error));
         },
       );
   };

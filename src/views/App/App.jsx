@@ -1,24 +1,20 @@
-/* eslint react/prefer-stateless-function: 0 */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import history from 'store/history';
+import PropTypes from 'prop-types';
 import Routes from 'routes';
 import withStyles from '@material-ui/core/styles/withStyles';
 import appStyles from 'assets/javascripts/views/appStyles';
 import Header from 'components/Header';
 import HeaderLinks from 'components/Header/HeaderLinks';
 import withTransition from 'views/layouts/withTransition';
-import { alertActions } from 'actions';
+import PositionedSnackbar from 'components/Alert/PositionedSnackbar';
+import alertActions from 'actions/alertActions';
 
 export class App extends React.Component {
   constructor(props) {
     super(props);
     const { dispatch } = this.props;
-    const unlisten = history.listen((location, action) => {
-      dispatch(alertActions.clear());
-    });
 
     if (window.performance) {
       if (performance.navigation.type === 1) {
@@ -28,21 +24,19 @@ export class App extends React.Component {
   }
 
   render() {
-    const dashboardRoutes = [];
     const {
-      classes, currentUser, ...rest
+      classes, currentUser, alert,
     } = this.props;
     return (
       <div className={classes.mainRaised}>
         <Header
-          color="lightGray"
-          routes={dashboardRoutes}
           brand="The Digital South English Legendary"
           rightLinks={<HeaderLinks />}
           absolute
-          changeColorOnScroll="false"
-          {...rest}
+          changeColorOnScroll={false}
         />
+        { !(Object.keys(alert.alert).length === 0 && alert.alert.constructor === Object)
+          && <PositionedSnackbar alert={alert.alert} /> }
         <Routes currentUser={currentUser} />
       </div>
     );
@@ -50,11 +44,23 @@ export class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { authentication } = state;
+  const { authentication, alert } = state;
   const { currentUser } = authentication;
   return {
-    currentUser,
+    currentUser, alert,
   };
 }
+
+App.propTypes = {
+  alert: PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
+  dispatch: PropTypes.func.isRequired,
+};
+
+App.defaultProps = {
+  alert: {},
+  currentUser: null,
+};
 
 export default withTransition(withRouter(connect(mapStateToProps)(withStyles(appStyles)(App))));
