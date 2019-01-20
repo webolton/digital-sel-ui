@@ -1,8 +1,8 @@
 import history from 'store/history';
 import userConstants from 'constants/userConstants';
 import userService from 'services/userService';
-import { alertActions } from '.';
 import handleResponse from './handleResponse';
+import alertActions from './alertActions';
 
 function login(email, password) {
   function request(currentUser) { return { type: userConstants.USER_LOGIN_REQUEST }; }
