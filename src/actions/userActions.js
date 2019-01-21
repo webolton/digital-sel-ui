@@ -16,12 +16,22 @@ function login(email, password) {
       .then(
         (currentUser) => {
           dispatch(success(currentUser));
-          const alertProps = { message: 'Login Success', anchorOrigin: { vertical: 'bottom', horizontal: 'left' }, variant: 'success' };
+          const successProps = {
+            message: 'Login success',
+            anchorOrigin: { vertical: 'top', horizontal: 'right' },
+            variant: 'success',
+          };
           history.push('/');
-          dispatch(alertActions.success(alertProps));
+          dispatch(alertActions.success(successProps));
         },
         (error) => {
           dispatch(failure(error));
+          const failureProps = {
+            message: 'Login failure',
+            anchorOrigin: { vertical: 'top', horizontal: 'right' },
+            variant: 'error',
+          };
+          dispatch(alertActions.error(failureProps));
         },
       );
   };
