@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
@@ -9,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
+import alertActions from 'actions/alertActions';
 import { withStyles } from '@material-ui/core/styles';
 import {
   successColor,
@@ -104,11 +106,14 @@ class PositionedSnackbar extends React.Component {
   };
 
   handleClose = (event, reason) => {
+    const { dispatch } = this.props;
+
     if (reason === 'clickaway') {
       return;
     }
 
     this.setState({ open: false });
+    dispatch(alertActions.clear());
   };
 
   render() {
@@ -155,4 +160,4 @@ PositionedSnackbar.defaultProps = {
   anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
 };
 
-export default PositionedSnackbar;
+export default connect()(PositionedSnackbar);
