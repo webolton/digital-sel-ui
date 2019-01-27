@@ -9,6 +9,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Slide from '@material-ui/core/Slide';
 import WarningIcon from '@material-ui/icons/Warning';
 import alertActions from 'actions/alertActions';
 import { withStyles } from '@material-ui/core/styles';
@@ -51,6 +52,7 @@ const contentStyle = {
     alignItems: 'center',
   },
 };
+
 
 const SnackBarContentWrapper = (props) => {
   const {
@@ -100,6 +102,12 @@ SnackBarContentWrapper.defaultProps = {
 
 const SnackbarWrapper = withStyles(contentStyle)(SnackBarContentWrapper);
 
+const positionedSnackbarStyle = {
+  root: {
+    marginTop: '100px',
+  },
+};
+
 class PositionedSnackbar extends React.Component {
   state = {
     open: true,
@@ -116,6 +124,10 @@ class PositionedSnackbar extends React.Component {
     dispatch(alertActions.clear());
   };
 
+  TransitionRight = (props) => {
+    return <Slide {...props} direction="left" />;
+  }
+
   render() {
     const {
       alert: { // eslint-disable-line react/prop-types
@@ -123,6 +135,7 @@ class PositionedSnackbar extends React.Component {
         anchorOrigin,
         variant,
       },
+      classes,
     } = this.props;
 
     const { handleClose } = this;
@@ -134,6 +147,8 @@ class PositionedSnackbar extends React.Component {
           open={open}
           autoHideDuration={3000}
           onClose={handleClose}
+          className={classes.root}
+          TransitionComponent={this.TransitionRight}
         >
           <SnackbarWrapper
             onClose={handleClose}
@@ -160,4 +175,4 @@ PositionedSnackbar.defaultProps = {
   anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
 };
 
-export default connect()(PositionedSnackbar);
+export default connect()(withStyles(positionedSnackbarStyle)(PositionedSnackbar));
