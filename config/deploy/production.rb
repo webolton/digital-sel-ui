@@ -1,4 +1,4 @@
-server 'ec2-3-91-103-149.compute-1.amazonaws.com', user: 'deploy', roles: %w{web}
+server '52.87.79.155', user: 'deploy', roles: %w{web}
 set :stage,           :production
 
 # role-based syntax
