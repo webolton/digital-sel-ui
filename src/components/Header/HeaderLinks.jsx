@@ -27,6 +27,17 @@ function HeaderLinks({ ...props }) {
   ));
   return (
     <List className={classes.list}>
+      <ListItem className={classes.listItem}>
+        <Button
+          id="dashBoardButton"
+          component={Link}
+          to="/dashboard"
+          color="primary"
+          className={classes.navLink}
+        >
+          Text Dashboard
+        </Button>
+      </ListItem>
       { isNil(currentUser) ? <LogInButton /> : (
         <ListItem className={classes.listItem}>
           <CustomDropdown
