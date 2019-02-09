@@ -1,16 +1,21 @@
-import { container, primaryColor } from 'assets/javascripts/digital-sel-ui';
+import { container, primaryColor, middleGray } from 'assets/javascripts/digital-sel-ui';
 
 const footerStyle = {
   block: {
-    color: 'inherit',
+    color: middleGray,
     padding: '0.9375rem',
     fontWeight: '500',
     fontSize: '12px',
-    textTransform: 'uppercase',
     borderRadius: '3px',
     textDecoration: 'none',
     position: 'relative',
     display: 'block',
+    '&:hover': {
+      color: primaryColor,
+    },
+    '&:visited': {
+      color: primaryColor,
+    },
   },
   left: {
     float: 'left!important',
@@ -22,21 +27,12 @@ const footerStyle = {
     float: 'right!important',
   },
   footer: {
+    color: middleGray,
     padding: '0.9375rem 0',
     textAlign: 'center',
     display: 'flex',
     zIndex: '2',
     position: 'relative',
-  },
-  a: {
-    color: primaryColor,
-    textDecoration: 'none',
-    backgroundColor: 'transparent',
-  },
-  footerWhiteFont: {
-    '&,&:hover,&:focus': {
-      color: '#FFFFFF',
-    },
   },
   container,
   list: {
