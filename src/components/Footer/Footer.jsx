@@ -1,58 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { List, ListItem, withStyles } from '@material-ui/core';
 import Favorite from '@material-ui/icons/Favorite';
 
 import footerStyle from 'assets/javascripts/components/footerStyle';
 
 function Footer({ ...props }) {
-  const { classes, whiteFont } = props;
-  const footerClasses = classNames({
-    [classes.footer]: true,
-    [classes.footerWhiteFont]: whiteFont,
-  });
-  const aClasses = classNames({
-    [classes.a]: true,
-    [classes.footerWhiteFont]: whiteFont,
-  });
+  const { classes } = props;
   return (
-    <footer className={footerClasses}>
+    <footer className={classes.footer}>
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/"
+                href="#"
                 className={classes.block}
                 target="_blank"
+                rel="noopener noreferrer"
               >
-                Creative Tim
+                Get involved
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/presentation"
+                href="http://william-bolton.com"
                 className={classes.block}
                 target="_blank"
+                rel="noopener noreferrer"
               >
-                About us
+                About the Maintainer
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="http://blog.creative-tim.com/"
+                href="http://blog.digitalsel.org"
                 className={classes.block}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Blog
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/license"
+                href="#"
                 className={classes.block}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Licenses
               </a>
@@ -64,21 +59,13 @@ function Footer({ ...props }) {
           {' '}
           {1900 + new Date().getYear()}
           {' '}
-, made with
+, William E. Bolton. Made with
           {' '}
           <Favorite className={classes.icon} />
           {' '}
-by
           {' '}
-          <a
-            href="https://www.creative-tim.com"
-            className={aClasses}
-            target="_blank"
-          >
-            Creative Tim
-          </a>
+in South Philadelphia.
           {' '}
-          for a better web.
         </div>
       </div>
     </footer>
@@ -87,7 +74,6 @@ by
 
 Footer.propTypes = {
   classes: PropTypes.object.isRequired,
-  whiteFont: PropTypes.bool,
 };
 
 export default withStyles(footerStyle)(Footer);

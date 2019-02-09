@@ -7,6 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import appStyles from 'assets/javascripts/views/appStyles';
 import Header from 'components/Header';
 import HeaderLinks from 'components/Header/HeaderLinks';
+import Footer from 'components/Footer';
 import withTransition from 'views/layouts/withTransition';
 import PositionedSnackbar from 'components/Alert/PositionedSnackbar';
 import alertActions from 'actions/alertActions';
@@ -38,6 +39,7 @@ export class App extends React.Component {
         { !(Object.keys(alert.alert).length === 0 && alert.alert.constructor === Object)
           && <PositionedSnackbar alert={alert.alert} /> }
         <Routes currentUser={currentUser} />
+        <Footer />
       </div>
     );
   }
