@@ -33,9 +33,9 @@ const warningColor = '#ff9800';
 const dangerColor = darkRed;
 const successColor = limeGreen;
 const infoColor = '#00acc1';
-const roseColor = '#336FAF';
 const grayColor = '#999999';
 const lightGrayColor = '#F8F9F7';
+const middleGray = '#949594'
 
 const drawerWidth = 260;
 
@@ -211,6 +211,7 @@ export {
   roseColor,
   grayColor,
   lightGrayColor,
+  middleGray,
   primaryBoxShadow,
   infoBoxShadow,
   successBoxShadow,
