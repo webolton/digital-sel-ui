@@ -28,7 +28,7 @@ const styles = {
   },
   appBar: {
     marginLeft: drawerWidth,
-    top: 75,
+    top: 135,
     backgroundColor: primaryColor,
   },
   menuButton: {
