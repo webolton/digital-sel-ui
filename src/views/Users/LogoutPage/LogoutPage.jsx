@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import userActions from 'actions/userActions';
 
 class LogoutPage extends React.Component {
@@ -18,5 +19,9 @@ function mapStateToProps(state) {
     loggingOut,
   };
 }
+
+LogoutPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps)(LogoutPage);

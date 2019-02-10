@@ -124,9 +124,7 @@ class PositionedSnackbar extends React.Component {
     dispatch(alertActions.clear());
   };
 
-  TransitionRight = (props) => {
-    return <Slide {...props} direction="left" />;
-  }
+  TransitionRight = props => <Slide {...props} direction="left" />
 
   render() {
     const {
