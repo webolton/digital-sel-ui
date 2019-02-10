@@ -1,4 +1,8 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import manuscriptActions from 'actions/manuscriptActions';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,67 +16,68 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import { primaryColor } from 'assets/javascripts/digital-sel-ui';
-
-const drawerWidth = 240;
-
-const styles = {
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    zIndex: 2,
-  },
-  appBar: {
-    marginLeft: drawerWidth,
-    top: 135,
-    backgroundColor: primaryColor,
-  },
-  menuButton: {
-    marginRight: 10,
-  },
-  toolbar: {
-    marginTop: 80,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    flexGrow: 1,
-  },
-};
+import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
 
 class Dashboard extends React.Component {
   state = {
     mobileOpen: false,
   };
 
+  componentDidMount() {
+    const { fetchManuscripts } = this.props;
+    fetchManuscripts();
+  }
+
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+    } = this.props;
+
+    const fetchingMSS = this.props.manuscripts.fetching;
+    const fetchedMSS = this.props.manuscripts.fetched;
 
     const drawer = (
       <div>
         <div className={classes.toolbar} />
         <List>
-          <ListItem button key="manuscriptsButton">
+          <ListItem
+            button
+            key="manuscriptsButton"
+            disabled={fetchingMSS}
+          >
             <ListItemIcon>
               <LibraryBooks />
             </ListItemIcon>
             <ListItemText primary="Manuscripts" />
           </ListItem>
+          {fetchingMSS && (
+          <CircularProgress
+            size={24}
+            className={classNames(classes.manuscriptProgress, classes.buttonProgress)}
+          />
+          )}
           <ListItem button key="saintsLegendsButton">
             <ListItemIcon>
               <SaintsLegendIcon />
             </ListItemIcon>
             <ListItemText primary="Saints' Legends" />
           </ListItem>
+          {/* TODO: Check for fetching saints legends */}
+          {fetchingMSS
+            && (
+            <CircularProgress
+              size={24}
+              className={classNames(classes.saintsLegendsProgress, classes.buttonProgress)}
+            />
+            )}
         </List>
       </div>
     );
@@ -124,19 +129,32 @@ class Dashboard extends React.Component {
             </Drawer>
           </Hidden>
         </nav>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Typography paragraph />
-          <Typography paragraph />
-        </main>
+        <main className={classes.content} />
       </div>
     );
   }
 }
 
 Dashboard.propTypes = {
+  fetchManuscripts: PropTypes.func.isRequired,
+  manuscripts: PropTypes.shape({
+    fetching: PropTypes.bool,
+    fetched: PropTypes.bool,
+    manuscripts: PropTypes.array,
+  }).isRequired,
   classes: PropTypes.object.isRequired,
   container: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Dashboard);
+
+export default compose(
+  connect(
+    state => ({
+      manuscripts: state.manuscripts,
+    }),
+    {
+      fetchManuscripts: manuscriptActions.fetchManuscripts,
+    },
+  ),
+  withStyles(dashboardStyles),
+)(Dashboard);

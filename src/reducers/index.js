@@ -4,6 +4,7 @@ import home from './home.reducer';
 import authentication from './authenticationReducer';
 import users from './usersReducer';
 import user from './userReducer';
+import manuscripts from './manuscriptReducer';
 import alert from './alertReducer';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   user,
   alert,
   home,
+  manuscripts,
   form: formReducer,
 });
 
