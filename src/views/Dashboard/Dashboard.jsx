@@ -130,9 +130,13 @@ class Dashboard extends React.Component {
             </Drawer>
           </Hidden>
         </nav>
-        <main className={classes.content}>
-          <DashboardCalltoAction />
-        </main>
+        <div className={classes.mainPanel}>
+          <div className={classes.content}>
+            <div className={classes.container}>
+              <DashboardCalltoAction />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

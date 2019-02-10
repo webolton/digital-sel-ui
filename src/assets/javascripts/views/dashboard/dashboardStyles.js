@@ -1,12 +1,46 @@
-import { primaryColor } from 'assets/javascripts/digital-sel-ui';
+import {
+  primaryColor,
+  transition,
+  container,
+} from 'assets/javascripts/digital-sel-ui';
 
 const drawerWidth = 240;
 
-const dashBoardStyles = {
+const dashBoardStyles = theme => ({
+  wrapper: {
+    position: 'relative',
+    top: '0',
+    height: '100vh',
+  },
+  mainPanel: {
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
+    overflow: 'auto',
+    position: 'relative',
+    float: 'right',
+    ...transition,
+    maxHeight: '100%',
+    width: '100%',
+    overflowScrolling: 'touch',
+  },
+  content: {
+    marginTop: '70px',
+    padding: '30px 15px',
+    minHeight: 'calc(100vh - 123px)',
+    flexGrow: 1,
+  },
+  container,
+  map: {
+    marginTop: '70px',
+  },
   root: {
     display: 'flex',
   },
   drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: 300,
+    },
     zIndex: 2,
   },
   appBar: {
@@ -23,9 +57,6 @@ const dashBoardStyles = {
   drawerPaper: {
     width: drawerWidth,
   },
-  content: {
-    flexGrow: 1,
-  },
   buttonProgress: {
     color: primaryColor,
     position: 'absolute',
@@ -39,6 +70,6 @@ const dashBoardStyles = {
   saintsLegendsProgress: {
     marginTop: 10,
   },
-};
+});
 
 export default dashBoardStyles;

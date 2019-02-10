@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { container } from 'assets/javascripts/digital-sel-ui';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Paper from '@material-ui/core/Paper';
@@ -10,6 +11,11 @@ const styles = {
   root: {
     marginTop: 100,
     paddingBottom: 12,
+    zIndex: 2,
+  },
+  container,
+  ctaWrapper: {
+    margin: 15,
   },
 };
 
@@ -17,18 +23,20 @@ function DashboardCalltoAction(props) {
   const { classes } = props;
 
   return (
-    <GridContainer justify="center">
-      <GridItem xs={12} sm={12} md={5}>
-        <Paper className={classes.root} elevation={1}>
-          <Typography variant="h5" component="h3">
+    <div className={classes.container}>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12} lg={12} className={classes.ctaWrapper}>
+          <Paper className={classes.root} elevation={1}>
+            <Typography variant="h5" component="h3">
             This will be the dashboard instructions.
-          </Typography>
-          <Typography component="p">
+            </Typography>
+            <Typography component="p">
             This will be the dashboard instructions.
-          </Typography>
-        </Paper>
-      </GridItem>
-    </GridContainer>
+            </Typography>
+          </Paper>
+        </GridItem>
+      </GridContainer>
+    </div>
   );
 }
 

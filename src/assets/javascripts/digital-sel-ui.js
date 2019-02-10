@@ -40,7 +40,7 @@ const grayColor = '#999999';
 const lightGrayColor = '#F8F9F7';
 const middleGray = '#949594';
 
-const drawerWidth = 260;
+const drawerWidth = 240;
 
 const transition = {
   transition: 'all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)',
