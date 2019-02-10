@@ -106,7 +106,7 @@ class CustomDropdown extends React.Component {
           transition
           disablePortal
           placement={
-            dropup
+            dropup //  eslint-disable-line no-nested-ternary
               ? left ? 'top-start' : 'top'
               : left ? 'bottom-start' : 'bottom'
           }
@@ -115,7 +115,7 @@ class CustomDropdown extends React.Component {
             [classes.pooperResponsive]: true,
           })}
         >
-          {({ TransitionProps, placement }) => (
+          {() => (
             <Grow
               in={open}
               id="menu-list"
@@ -136,11 +136,11 @@ class CustomDropdown extends React.Component {
                         {dropdownHeader}
                       </MenuItem>
                     ) : null}
-                    {dropdownList.map((prop, key) => {
+                    {dropdownList.map((prop) => {
                       if (prop.divider) {
                         return (
                           <Divider
-                            key={key}
+                            key={`divider-${prop.id}`}
                             onClick={this.handleClose}
                             className={classes.dropdownDividerItem}
                           />
@@ -148,7 +148,7 @@ class CustomDropdown extends React.Component {
                       }
                       return (
                         <MenuItem
-                          key={key}
+                          key={`menu-item-${prop.id}`}
                           onClick={this.handleClose}
                           className={dropdownItem}
                         >
@@ -170,6 +170,16 @@ class CustomDropdown extends React.Component {
 CustomDropdown.defaultProps = {
   caret: true,
   hoverColor: 'primary',
+  buttonText: 'Submit',
+  buttonIcon: null,
+  dropdownList: [],
+  buttonProps: {},
+  dropup: false,
+  dropdownHeader: undefined,
+  rtlActive: false,
+  left: true,
+  noLiPadding: undefined,
+  onClick: undefined,
 };
 
 CustomDropdown.propTypes = {
@@ -193,7 +203,6 @@ CustomDropdown.propTypes = {
   caret: PropTypes.bool,
   left: PropTypes.bool,
   noLiPadding: PropTypes.bool,
-  // function that retuns the selected item
   onClick: PropTypes.func,
 };
 
