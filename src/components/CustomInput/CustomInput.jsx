@@ -85,4 +85,16 @@ CustomInput.propTypes = {
   white: PropTypes.bool,
 };
 
+CustomInput.defaultProps = {
+  labelText: null,
+  labelProps: {},
+  id: '',
+  inputProps: {},
+  formControlProps: {},
+  inputRootCustomClasses: '',
+  error: false,
+  success: false,
+  white: false,
+};
+
 export default withStyles(customInputStyle)(CustomInput);

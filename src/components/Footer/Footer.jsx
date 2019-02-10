@@ -14,7 +14,7 @@ function Footer({ ...props }) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="#"
+                href="http://blog.digitalsel.org"
                 className={classes.block}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -44,7 +44,7 @@ function Footer({ ...props }) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="#"
+                href="http://blog.digitalsel.org"
                 className={classes.block}
                 target="_blank"
                 rel="noopener noreferrer"
