@@ -24,7 +24,7 @@ const styles = {
     display: 'flex',
   },
   drawer: {
-    zIndex: 1,
+    zIndex: 2,
   },
   appBar: {
     marginLeft: drawerWidth,
