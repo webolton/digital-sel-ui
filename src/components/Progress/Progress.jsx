@@ -51,6 +51,11 @@ function Progress(props) {
 
 Progress.propTypes = {
   classes: PropTypes.object.isRequired,
+  message: PropTypes.string,
+};
+
+Progress.defaultProps = {
+  message: 'Loading',
 };
 
 export default withStyles(styles)(Progress);
