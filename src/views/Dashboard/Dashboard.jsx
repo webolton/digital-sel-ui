@@ -21,6 +21,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
+import DashboardCalltoAction from './DashboardCalltoAction';
 
 class Dashboard extends React.Component {
   state = {
@@ -129,7 +130,9 @@ class Dashboard extends React.Component {
             </Drawer>
           </Hidden>
         </nav>
-        <main className={classes.content} />
+        <main className={classes.content}>
+          <DashboardCalltoAction />
+        </main>
       </div>
     );
   }
