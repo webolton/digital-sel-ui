@@ -7,8 +7,10 @@
  ┕——————————————————————————————-(..)(..) ∫∫———————————————————————————┙
 
  Copyright 2018 William E. Bolton (http://www.william-bolton.com)
- Licensed under MIT (https://github.com/creativetimofficial/material-kit-react/blob/master/LICENSE.md)
- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ Licensed under MIT
+ https://github.com/creativetimofficial/material-kit-react/blob/master/LICENSE.md)
+ The above copyright notice and this permission notice shall be included in all copies or
+ substantial portions of the Software.
 
  */
 
@@ -32,10 +34,11 @@ const secondaryColor = limeGreen;
 const warningColor = '#ff9800';
 const dangerColor = darkRed;
 const successColor = limeGreen;
+const roseColor = warningColor;
 const infoColor = '#00acc1';
 const grayColor = '#999999';
 const lightGrayColor = '#F8F9F7';
-const middleGray = '#949594'
+const middleGray = '#949594';
 
 const drawerWidth = 260;
 

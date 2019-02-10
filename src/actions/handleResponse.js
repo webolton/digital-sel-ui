@@ -5,12 +5,14 @@ const unauthorizedResponse = (response) => {
   if (response.status === 401) {
     return true;
   }
+  return false;
 };
 
 const successfulResponse = (response) => {
   if (response.status === 200 || response.status === 201) {
     return true;
   }
+  return false;
 };
 
 const handleResponse = (successCallback, failureCallback, response, dispatch) => {
@@ -27,8 +29,6 @@ const handleResponse = (successCallback, failureCallback, response, dispatch) =>
     }).catch((error) => {
       throw error;
     });
-  } else {
-
   }
 };
 

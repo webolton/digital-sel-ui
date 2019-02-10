@@ -24,4 +24,8 @@ CardBody.propTypes = {
   className: PropTypes.string,
 };
 
+CardBody.defaultProps = {
+  className: undefined,
+};
+
 export default withStyles(cardBodyStyle)(CardBody);

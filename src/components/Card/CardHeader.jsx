@@ -28,4 +28,10 @@ CardHeader.propTypes = {
   plain: PropTypes.bool,
 };
 
+CardHeader.defaultProps = {
+  color: 'primary',
+  plain: true,
+  className: undefined,
+};
+
 export default withStyles(cardHeaderStyle)(CardHeader);

@@ -24,4 +24,8 @@ CardFooter.propTypes = {
   className: PropTypes.string,
 };
 
+CardFooter.defaultProps = {
+  className: undefined,
+};
+
 export default withStyles(cardFooterStyle)(CardFooter);
