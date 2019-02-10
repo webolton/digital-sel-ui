@@ -27,6 +27,8 @@ const handleResponse = (successCallback, failureCallback, response, dispatch) =>
     }).catch((error) => {
       throw error;
     });
+  } else {
+
   }
 };
 

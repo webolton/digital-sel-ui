@@ -1,4 +1,4 @@
-import { authHeader } from '../utilities';
+import authHeader from 'utilities/authHeader';
 import handleResponse from './handleResponse';
 
 const API_URL = process.env.REACT_APP_API_URL;
