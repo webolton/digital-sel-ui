@@ -27,7 +27,7 @@ class SaintsMenu extends React.Component {
   };
 
   render() {
-    const { classes, popperOpen } = this.props;
+    const { classes, menuOpen } = this.props;
     const { open } = this.state;
     const id = open ? 'simple-popper' : null;
     const anchorEl = document.getElementById('popperAnchor2');
@@ -36,7 +36,7 @@ class SaintsMenu extends React.Component {
         <Button aria-describedby={id} variant="contained" onClick={this.handleClick} id="popperAnchor2">
           Toggle Popper
         </Button>
-        <Popper id={id} open={popperOpen} anchorEl={anchorEl} transition>
+        <Popper id={id} open={menuOpen} anchorEl={anchorEl} transition>
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
               <Paper>

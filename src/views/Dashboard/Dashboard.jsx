@@ -148,8 +148,8 @@ class Dashboard extends React.Component {
         <div className={classes.mainPanel}>
           <div className={classes.content}>
             <div className={classes.container}>
-              <ManuscriptsMenu popperOpen={this.state.msSelected} />
-              <SaintsMenu popperOpen={this.state.stSelected} />
+              <ManuscriptsMenu menuOpen={this.state.msSelected} />
+              <SaintsMenu menuOpen={this.state.stSelected} />
               <DashboardInstructions />
             </div>
           </div>

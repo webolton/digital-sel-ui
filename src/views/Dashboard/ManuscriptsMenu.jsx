@@ -38,14 +38,14 @@ class ManuscriptsMenu extends React.Component {
   };
 
   render() {
-    const { classes, popperOpen } = this.props;
+    const { classes, menuOpen } = this.props;
     const { open } = this.state;
     const id = open ? 'simple-popper' : null;
     const anchorEl = document.getElementById('msAnchor');
     return (
       <div>
         <div aria-describedby={id} id="msAnchor" />
-        <Popper id={id} open={popperOpen} anchorEl={anchorEl} transition>
+        <Popper id={id} open={menuOpen} anchorEl={anchorEl} transition>
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
               <GridContainer>
