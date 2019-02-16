@@ -19,7 +19,7 @@ const styles = {
   },
 };
 
-function DashboardCalltoAction(props) {
+function DashboardInstructions(props) {
   const { classes } = props;
 
   return (
@@ -40,8 +40,8 @@ function DashboardCalltoAction(props) {
   );
 }
 
-DashboardCalltoAction.propTypes = {
+DashboardInstructions.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DashboardCalltoAction);
+export default withStyles(styles)(DashboardInstructions);
