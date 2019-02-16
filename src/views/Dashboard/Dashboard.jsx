@@ -150,7 +150,7 @@ class Dashboard extends React.Component {
             <div className={classes.container}>
               <ManuscriptsMenu menuOpen={this.state.msSelected} />
               <SaintsMenu menuOpen={this.state.stSelected} />
-              <DashboardInstructions />
+              <DashboardInstructions showInstructions={this.state.msSelected || this.state.stSelected}/>
             </div>
           </div>
         </div>

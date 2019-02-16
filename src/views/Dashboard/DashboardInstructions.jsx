@@ -6,6 +6,7 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Fade from '@material-ui/core/Fade';
 
 const styles = {
   root: {
@@ -20,22 +21,24 @@ const styles = {
 };
 
 function DashboardInstructions(props) {
-  const { classes } = props;
+  const { classes, showInstructions } = props;
 
   return (
     <div className={classes.container}>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12} lg={12} className={classes.ctaWrapper}>
-          <Paper className={classes.root} elevation={1}>
-            <Typography variant="h5" component="h3">
-            This will be the dashboard instructions.
-            </Typography>
-            <Typography component="p">
-            This will be the dashboard instructions.
-            </Typography>
-          </Paper>
-        </GridItem>
-      </GridContainer>
+      <Fade in={!showInstructions}>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12} lg={12} className={classes.ctaWrapper}>
+            <Paper className={classes.root} elevation={1}>
+              <Typography variant="h5" component="h3">
+              This will be the dashboard instructions.
+              </Typography>
+              <Typography component="p">
+              This will be the dashboard instructions.
+              </Typography>
+            </Paper>
+          </GridItem>
+        </GridContainer>
+      </Fade>
     </div>
   );
 }
