@@ -21,16 +21,24 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
-import DashboardCalltoAction from './DashboardCalltoAction';
+import DashboardInstructions from './DashboardInstructions';
+import ManuscriptsMenu from './ManuscriptsMenu';
+import SaintsMenu from './SaintsMenu';
 
 class Dashboard extends React.Component {
   state = {
     mobileOpen: false,
+    msSelected: false,
+    stSelected: false,
   };
 
   componentDidMount() {
     const { fetchManuscripts } = this.props;
     fetchManuscripts();
+  }
+
+  toggleSelected = (selectedButton) => {
+    this.setState(state => ({ [selectedButton]: !state[selectedButton] }));
   }
 
   handleDrawerToggle = () => {
@@ -53,6 +61,8 @@ class Dashboard extends React.Component {
             button
             key="manuscriptsButton"
             disabled={fetchingMSS}
+            onClick={() => this.toggleSelected('msSelected')}
+            selected={this.state.msSelected}
           >
             <ListItemIcon>
               <LibraryBooks />
@@ -65,7 +75,12 @@ class Dashboard extends React.Component {
             className={classNames(classes.manuscriptProgress, classes.buttonProgress)}
           />
           )}
-          <ListItem button key="saintsLegendsButton">
+          <ListItem
+            button
+            key="saintsLegendsButton"
+            onClick={() => this.toggleSelected('stSelected')}
+            selected={this.state.stSelected}
+          >
             <ListItemIcon>
               <SaintsLegendIcon />
             </ListItemIcon>
@@ -133,7 +148,9 @@ class Dashboard extends React.Component {
         <div className={classes.mainPanel}>
           <div className={classes.content}>
             <div className={classes.container}>
-              <DashboardCalltoAction />
+              <ManuscriptsMenu popperOpen={this.state.msSelected} />
+              <SaintsMenu popperOpen={this.state.stSelected} />
+              <DashboardInstructions />
             </div>
           </div>
         </div>
