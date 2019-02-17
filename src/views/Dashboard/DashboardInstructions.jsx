@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { container } from 'assets/javascripts/digital-sel-ui';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-import Paper from '@material-ui/core/Paper';
 import Card from 'components/Card';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
@@ -38,7 +37,7 @@ function DashboardInstructions(props) {
                   variant="h5"
                   color="inherit"
                   align="center"
-                  >
+                >
                   SEL Text Interaction Dashboard
                 </Typography>
               </CardHeader>
@@ -55,7 +54,7 @@ function DashboardInstructions(props) {
                   proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </Typography>
               </CardBody>
-              <CardFooter/>
+              <CardFooter />
             </Card>
           </GridItem>
         </GridContainer>
@@ -66,6 +65,11 @@ function DashboardInstructions(props) {
 
 DashboardInstructions.propTypes = {
   classes: PropTypes.object.isRequired,
+  showInstructions: PropTypes.bool,
+};
+
+DashboardInstructions.defaultProps = {
+  showInstructions: true,
 };
 
 export default withStyles(styles)(DashboardInstructions);
