@@ -112,7 +112,7 @@ class Dashboard extends React.Component {
               >
                 <ArrowForward />
               </IconButton>
-              <Typography variant="h7" color="inherit" noWrap>
+              <Typography variant="h6" color="inherit" noWrap>
                 Show Dashboard Menu
               </Typography>
             </Toolbar>
