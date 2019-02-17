@@ -24,7 +24,12 @@ const darkCerulean = '#005794'; // Dark version of Primary
 const darkerCerulean = '#003961'; // Darker version of primary
 
 // Greens -- Secondary
+const darkCyan = '#2D9C66';
 const limeGreen = '#39C380';
+const lightLime = '#5FD099';
+
+// Pinks
+const bouquet = '#B683A7';
 
 const darkRed = '#AF3533';
 const tangerine = '#F08700';
@@ -115,6 +120,10 @@ const roseBoxShadow = {
   boxShadow:
     '0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 30, 99, 0.4)',
 };
+const greenBoxShadow = {
+  boxShadow:
+    '0 12px 20px -10px rgba(57, 195, 128, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(57, 195, 128, 0.2)',
+};
 
 const warningCardHeader = {
   color: '#fff',
@@ -145,6 +154,11 @@ const roseCardHeader = {
   color: '#fff',
   background: 'linear-gradient(60deg, #ec407a, #d81b60)',
   ...roseBoxShadow,
+};
+const greenCardHeader = {
+  color: '#fff',
+  background: 'linear-gradient(60deg, #39C380, #2D9C66)',
+  ...greenBoxShadow,
 };
 const cardActions = {
   margin: '0 20px 10px',
@@ -226,6 +240,7 @@ export {
   dangerCardHeader,
   infoCardHeader,
   primaryCardHeader,
+  greenCardHeader,
   roseCardHeader,
   cardActions,
   cardHeader,

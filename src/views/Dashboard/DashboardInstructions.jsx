@@ -15,7 +15,6 @@ const styles = {
   root: {
     marginTop: 100,
     paddingBottom: 12,
-    zIndex: 2,
   },
   container,
   instructionWrapper: {

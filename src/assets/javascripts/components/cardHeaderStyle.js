@@ -4,6 +4,7 @@ import {
   dangerCardHeader,
   infoCardHeader,
   primaryCardHeader,
+  greenCardHeader,
 } from 'assets/javascripts/digital-sel-ui';
 
 const cardHeaderStyle = {
@@ -25,6 +26,7 @@ const cardHeaderStyle = {
   dangerCardHeader,
   infoCardHeader,
   primaryCardHeader,
+  greenCardHeader,
 };
 
 export default cardHeaderStyle;

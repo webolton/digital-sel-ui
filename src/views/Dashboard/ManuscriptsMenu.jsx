@@ -7,20 +7,22 @@ import Typography from '@material-ui/core/Typography';
 import Fade from '@material-ui/core/Fade';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-import Paper from '@material-ui/core/Paper';
+import Card from 'components/Card';
+import CardBody from 'components/Card/CardBody';
+import CardHeader from 'components/Card/CardHeader';
+import CardFooter from 'components/Card/CardFooter';
 
 const styles = theme => ({
   typography: {
     padding: theme.spacing.unit * 2,
   },
-  root: {
-    marginTop: 100,
-    paddingBottom: 12,
-    zIndex: 2,
-  },
   container,
-  ctaWrapper: {
+  msMenuWrapper: {
     margin: 15,
+  },
+  popper: {
+    marginTop: 35,
+    maxWidth: 1080,
   },
 });
 
@@ -43,18 +45,45 @@ class ManuscriptsMenu extends React.Component {
     const id = open ? 'simple-popper' : null;
     const anchorEl = document.getElementById('msAnchor');
     return (
-      <div>
+      <div className={classes.container}>
         <div aria-describedby={id} id="msAnchor" />
-        <Popper id={id} open={menuOpen} anchorEl={anchorEl} transition>
+        <Popper
+          id={id}
+          open={menuOpen}
+          anchorEl={anchorEl}
+          transition
+          disablePortal
+          className={classes.popper}
+        >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={12} lg={12} className={classes.ctaWrapper}>
-                  <Paper className={classes.root} elevation={1}>
-                    <Typography variant="h5" component="h3">
-                      This will hold the manuscript selection menu
-                    </Typography>
-                  </Paper>
+                <GridItem xs={12} sm={12} md={12} lg={12} className={classes.msMenuWrapper}>
+                  <Card>
+                    <CardHeader color="green" className={classes.cardHeader}>
+                      <Typography
+                        variant="h5"
+                        color="inherit"
+                        align="center"
+                      >
+                        Manuscripts Menu
+                      </Typography>
+                    </CardHeader>
+                    <CardBody>
+                      <Typography variant="h5">
+                        Manuscripts Menu
+                      </Typography>
+                      <Typography variant="body1">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat no
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      </Typography>
+                    </CardBody>
+                    <CardFooter />
+                  </Card>
                 </GridItem>
               </GridContainer>
             </Fade>
