@@ -29,7 +29,9 @@ const limeGreen = '#39C380';
 const lightLime = '#5FD099';
 
 // Pinks
-const bouquet = '#B683A7';
+const lightMagenta = '#CA4b89'
+const darkMagenta = '#C3397C';
+const darkerMagenta = '#9C2D63';
 
 const darkRed = '#AF3533';
 const tangerine = '#F08700';
@@ -124,6 +126,10 @@ const greenBoxShadow = {
   boxShadow:
     '0 12px 20px -10px rgba(57, 195, 128, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(57, 195, 128, 0.2)',
 };
+const pinkBoxShadow = {
+  boxShadow:
+    '0 12px 20px -10px rgba(202, 75, 137, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 45, 99, 0.2)',
+};
 
 const warningCardHeader = {
   color: '#fff',
@@ -159,6 +165,11 @@ const greenCardHeader = {
   color: '#fff',
   background: 'linear-gradient(60deg, #39C380, #2D9C66)',
   ...greenBoxShadow,
+};
+const pinkCardHeader = {
+  color: '#fff',
+  background: 'linear-gradient(60deg, #C3397C, #9C2D63)',
+  ...pinkBoxShadow,
 };
 const cardActions = {
   margin: '0 20px 10px',
@@ -242,6 +253,7 @@ export {
   primaryCardHeader,
   greenCardHeader,
   roseCardHeader,
+  pinkCardHeader,
   cardActions,
   cardHeader,
   defaultBoxShadow,

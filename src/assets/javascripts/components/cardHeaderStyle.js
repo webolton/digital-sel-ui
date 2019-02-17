@@ -5,6 +5,7 @@ import {
   infoCardHeader,
   primaryCardHeader,
   greenCardHeader,
+  pinkCardHeader,
 } from 'assets/javascripts/digital-sel-ui';
 
 const cardHeaderStyle = {
@@ -27,6 +28,7 @@ const cardHeaderStyle = {
   infoCardHeader,
   primaryCardHeader,
   greenCardHeader,
+  pinkCardHeader,
 };
 
 export default cardHeaderStyle;
