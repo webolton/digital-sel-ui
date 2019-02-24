@@ -11,7 +11,6 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
-import SaintsLegendIcon from 'components/customIcons/SaintsLegendIcon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -22,14 +21,12 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
 import DashboardInstructions from './DashboardInstructions';
-import ManuscriptsMenu from './ManuscriptsMenu';
-import SaintsMenu from './SaintsMenu';
+import TextSelectionMenu from './TextSelectionMenu';
 
 class Dashboard extends React.Component {
   state = {
     mobileOpen: false,
-    msSelected: false,
-    stSelected: false,
+    menuSelected: false,
   };
 
   componentDidMount() {
@@ -59,32 +56,14 @@ class Dashboard extends React.Component {
         <List>
           <ListItem
             button
-            key="manuscriptsButton"
-            disabled={fetchingMSS}
-            onClick={() => this.toggleSelected('msSelected')}
-            selected={this.state.msSelected}
+            key="textSelectionButton"
+            onClick={() => this.toggleSelected('menuSelected')}
+            selected={this.state.menuSelected}
           >
             <ListItemIcon>
               <LibraryBooks />
             </ListItemIcon>
-            <ListItemText primary="Manuscripts" />
-          </ListItem>
-          {fetchingMSS && (
-          <CircularProgress
-            size={24}
-            className={classNames(classes.manuscriptProgress, classes.buttonProgress)}
-          />
-          )}
-          <ListItem
-            button
-            key="saintsLegendsButton"
-            onClick={() => this.toggleSelected('stSelected')}
-            selected={this.state.stSelected}
-          >
-            <ListItemIcon>
-              <SaintsLegendIcon />
-            </ListItemIcon>
-            <ListItemText primary="Saints' Legends" />
+            <ListItemText primary="Text Selector" />
           </ListItem>
           {/* TODO: Check for fetching saints legends */}
           {fetchingMSS
@@ -148,10 +127,11 @@ class Dashboard extends React.Component {
         <div className={classes.mainPanel}>
           <div className={classes.content}>
             <div className={classes.container}>
-              <ManuscriptsMenu menuOpen={this.state.msSelected} />
-              <SaintsMenu menuOpen={this.state.stSelected} />
+              <TextSelectionMenu
+                menuOpen={this.state.menuSelected}
+              />
               <DashboardInstructions
-                showInstructions={this.state.msSelected || this.state.stSelected}
+                showInstructions={this.state.menuSelected}
               />
             </div>
           </div>

@@ -29,7 +29,7 @@ const limeGreen = '#39C380';
 const lightLime = '#5FD099';
 
 // Pinks
-const lightMagenta = '#CA4b89'
+const lightMagenta = '#CA4b89';
 const darkMagenta = '#C3397C';
 const darkerMagenta = '#9C2D63';
 
@@ -227,6 +227,7 @@ export {
   boxShadow,
   card,
   defaultFont,
+  // Colors
   darkCerulean,
   darkerCerulean,
   tangerine,
@@ -240,6 +241,12 @@ export {
   grayColor,
   lightGrayColor,
   middleGray,
+  darkCyan,
+  limeGreen,
+  lightLime,
+  lightMagenta,
+  darkMagenta,
+  darkerMagenta,
   primaryBoxShadow,
   infoBoxShadow,
   successBoxShadow,

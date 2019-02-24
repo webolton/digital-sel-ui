@@ -15,10 +15,13 @@ const styles = {
   root: {
     marginTop: 100,
     paddingBottom: 12,
+    zIndex: 2,
   },
   container,
   instructionWrapper: {
     margin: 15,
+  },
+  fader: {
   },
 };
 
@@ -27,7 +30,7 @@ function DashboardInstructions(props) {
 
   return (
     <div className={classes.container}>
-      <Fade in={!showInstructions}>
+      <Fade in={!showInstructions} className={classes.fader}>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12} lg={12} className={classes.instructionWrapper}>
             <Card>
