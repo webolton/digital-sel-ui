@@ -21,6 +21,16 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
   },
   container,
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  column: {
+    flexBasis: '33.33%',
+  },
   popper: {
     maxWidth: 1080,
   },
@@ -71,7 +81,16 @@ class TextSelectionMenu extends React.Component {
                     <CardBody>
                       <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                          <Typography className={classes.heading}>Manuscripts</Typography>
+                          <div className={classes.column}>
+                            <Typography className={classes.heading}>Manuscripts</Typography>
+                          </div>
+                          <div className={classes.column}>
+                            <Typography
+                              className={classes.secondaryHeading}
+                            >
+                              Narrow your selection by manuscript
+                            </Typography>
+                          </div>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                           <Typography>
@@ -82,7 +101,20 @@ class TextSelectionMenu extends React.Component {
                       </ExpansionPanel>
                       <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                          <Typography className={classes.heading}>Saints&rsquo; Legends</Typography>
+                          <div className={classes.column}>
+                            <Typography
+                              className={classes.heading}
+                            >
+                              Saints&rsquo; Legends
+                            </Typography>
+                          </div>
+                          <div className={classes.column}>
+                            <Typography
+                              className={classes.secondaryHeading}
+                            >
+                              Narrow your selection by saints&rsquo legends
+                            </Typography>
+                          </div>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                           <Typography>
