@@ -5,6 +5,7 @@ import authentication from './authenticationReducer';
 import users from './usersReducer';
 import user from './userReducer';
 import manuscripts from './manuscriptReducer';
+import saintsLegends from './saintsLegendReducer';
 import alert from './alertReducer';
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   alert,
   home,
   manuscripts,
+  saintsLegends,
   form: formReducer,
 });
 

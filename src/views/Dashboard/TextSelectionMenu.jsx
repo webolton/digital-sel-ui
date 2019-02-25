@@ -112,7 +112,7 @@ class TextSelectionMenu extends React.Component {
                             <Typography
                               className={classes.secondaryHeading}
                             >
-                              Narrow your selection by saints&rsquo legends
+                              Narrow your selection by saints&rsquo; legends
                             </Typography>
                           </div>
                         </ExpansionPanelSummary>

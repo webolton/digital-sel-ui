@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import manuscriptActions from 'actions/manuscriptActions';
+import saintsLegendActions from 'actions/saintsLegendActions';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -30,8 +31,9 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    const { fetchManuscripts } = this.props;
+    const { fetchManuscripts, fetchSaintsLegends } = this.props;
     fetchManuscripts();
+    fetchSaintsLegends();
   }
 
   toggleSelected = (selectedButton) => {
@@ -49,6 +51,10 @@ class Dashboard extends React.Component {
 
     const fetchingMSS = this.props.manuscripts.fetching;
     const fetchedMSS = this.props.manuscripts.fetched;
+    const fetchingSts = this.props.saintsLegends.fetching;
+    const fetchedSts = this.props.saintsLegends.fetched;
+
+    console.log(this.props)
 
     const drawer = (
       <div>
@@ -148,6 +154,12 @@ Dashboard.propTypes = {
     fetched: PropTypes.bool,
     manuscripts: PropTypes.array,
   }).isRequired,
+  fetchSaintsLegends: PropTypes.func.isRequired,
+  saintsLegends: PropTypes.shape({
+    fetching: PropTypes.bool,
+    fetched: PropTypes.bool,
+    saints_legends: PropTypes.array,
+  }).isRequired,
   classes: PropTypes.object.isRequired,
   container: PropTypes.object.isRequired,
 };
@@ -157,9 +169,11 @@ export default compose(
   connect(
     state => ({
       manuscripts: state.manuscripts,
+      saintsLegends: state.saintsLegends,
     }),
     {
       fetchManuscripts: manuscriptActions.fetchManuscripts,
+      fetchSaintsLegends: saintsLegendActions.fetchSaintsLegends,
     },
   ),
   withStyles(dashboardStyles),
