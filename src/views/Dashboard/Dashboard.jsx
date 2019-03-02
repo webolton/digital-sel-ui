@@ -21,13 +21,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
-import DashboardInstructions from './DashboardInstructions';
 import TextSelectionMenu from './TextSelectionMenu';
 
 class Dashboard extends React.Component {
   state = {
     mobileOpen: false,
-    menuSelected: false,
+    menuSelected: true,
   };
 
   componentDidMount() {
@@ -137,9 +136,6 @@ class Dashboard extends React.Component {
                 menuOpen={this.state.menuSelected}
                 manuscripts={manuscripts}
                 saints_legends={saints_legends}
-              />
-              <DashboardInstructions
-                showInstructions={this.state.menuSelected}
               />
             </div>
           </div>
