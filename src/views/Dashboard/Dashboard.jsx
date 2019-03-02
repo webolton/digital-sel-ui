@@ -54,8 +54,6 @@ class Dashboard extends React.Component {
     const fetchingSts = this.props.saintsLegends.fetching;
     const fetchedSts = this.props.saintsLegends.fetched;
 
-    console.log(this.props)
-
     const drawer = (
       <div>
         <div className={classes.toolbar} />
@@ -71,8 +69,7 @@ class Dashboard extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Text Selector" />
           </ListItem>
-          {/* TODO: Check for fetching saints legends */}
-          {fetchingMSS
+          {(fetchingMSS || fetchingSts)
             && (
             <CircularProgress
               size={24}
@@ -82,6 +79,9 @@ class Dashboard extends React.Component {
         </List>
       </div>
     );
+
+    const { manuscripts } = this.props.manuscripts.manuscripts;
+    const { saints_legends } = this.props.saintsLegends.saintsLegends;
 
     return (
       <div className={classes.root}>
@@ -135,6 +135,8 @@ class Dashboard extends React.Component {
             <div className={classes.container}>
               <TextSelectionMenu
                 menuOpen={this.state.menuSelected}
+                manuscripts={manuscripts}
+                saints_legends={saints_legends}
               />
               <DashboardInstructions
                 showInstructions={this.state.menuSelected}
@@ -152,13 +154,17 @@ Dashboard.propTypes = {
   manuscripts: PropTypes.shape({
     fetching: PropTypes.bool,
     fetched: PropTypes.bool,
-    manuscripts: PropTypes.array,
+    manuscripts: {
+      manuscripts: PropTypes.array,
+    },
   }).isRequired,
   fetchSaintsLegends: PropTypes.func.isRequired,
   saintsLegends: PropTypes.shape({
     fetching: PropTypes.bool,
     fetched: PropTypes.bool,
-    saints_legends: PropTypes.array,
+    saintsLegends: {
+      saints_legends: PropTypes.array,
+    },
   }).isRequired,
   classes: PropTypes.object.isRequired,
   container: PropTypes.object.isRequired,
