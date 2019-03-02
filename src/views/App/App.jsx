@@ -11,6 +11,8 @@ import Footer from 'components/Footer';
 import withTransition from 'views/layouts/withTransition';
 import PositionedSnackbar from 'components/Alert/PositionedSnackbar';
 import alertActions from 'actions/alertActions';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from 'theme';
 
 export class App extends React.Component {
   constructor(props) {
@@ -29,18 +31,20 @@ export class App extends React.Component {
       classes, currentUser, alert,
     } = this.props;
     return (
-      <div className={classes.mainRaised}>
-        <Header
-          brand="The Digital South English Legendary"
-          rightLinks={<HeaderLinks />}
-          absolute
-          changeColorOnScroll={false}
-        />
-        { !(Object.keys(alert.alert).length === 0 && alert.alert.constructor === Object)
-          && <PositionedSnackbar alert={alert.alert} /> }
-        <Routes currentUser={currentUser} />
-        <Footer />
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <div className={classes.mainRaised}>
+          <Header
+            brand="The Digital South English Legendary"
+            rightLinks={<HeaderLinks />}
+            absolute
+            changeColorOnScroll={false}
+          />
+          { !(Object.keys(alert.alert).length === 0 && alert.alert.constructor === Object)
+            && <PositionedSnackbar alert={alert.alert} /> }
+          <Routes currentUser={currentUser} />
+          <Footer />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
