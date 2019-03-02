@@ -9,7 +9,7 @@ const theme = createMuiTheme({
   overrides: {
     MUIDataTableBodyCell: {
       root: {
-        // minWidth: 400,
+        minWidth: 400,
       },
     },
   },

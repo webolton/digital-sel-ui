@@ -15,6 +15,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ManuscriptsTable from './ManuscriptsTable';
 
 const styles = theme => ({
   typography: {
@@ -50,10 +51,11 @@ class TextSelectionMenu extends React.Component {
   };
 
   render() {
-    const { classes, menuOpen } = this.props;
+    const { classes, menuOpen, manuscripts, saints_legends } = this.props;
     const { open } = this.state;
     const id = open ? 'simple-popper' : null;
     const anchorEl = document.getElementById('stAnchor');
+
     return (
       <div>
         <div aria-describedby={id} id="stAnchor" />
@@ -63,6 +65,7 @@ class TextSelectionMenu extends React.Component {
           anchorEl={anchorEl}
           transition
           className={classes.popper}
+          disablePortal
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
@@ -79,52 +82,37 @@ class TextSelectionMenu extends React.Component {
                       </Typography>
                     </CardHeader>
                     <CardBody>
-                      <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                          <div className={classes.column}>
-                            <Typography className={classes.heading}>Manuscripts</Typography>
-                          </div>
-                          <div className={classes.column}>
-                            <Typography
-                              className={classes.secondaryHeading}
-                            >
-                              Narrow your selection by manuscript
+                      <div className={classes.panelWrapper}>
+                        <ExpansionPanel>
+                          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                            <div>
+                              <Typography className={classes.heading}>Manuscripts</Typography>
+                            </div>
+                          </ExpansionPanelSummary>
+                          <ExpansionPanelDetails>
+                            <ManuscriptsTable manuscripts={manuscripts}/>
+                          </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                            <div>
+                              <Typography
+                                className={classes.heading}
+                              >
+                                Saints&rsquo; Legends
+                              </Typography>
+                            </div>
+                          </ExpansionPanelSummary>
+                          <ExpansionPanelDetails>
+                            <Typography>
+                               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                               malesuada lacus ex, sit amet blandit leo lobortis eget.
+                               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                               malesuada lacus ex, sit amet blandit leo lobortis eget.
                             </Typography>
-                          </div>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                          <Typography>
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                             malesuada lacus ex, sit amet blandit leo lobortis eget.
-                          </Typography>
-                        </ExpansionPanelDetails>
-                      </ExpansionPanel>
-                      <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                          <div className={classes.column}>
-                            <Typography
-                              className={classes.heading}
-                            >
-                              Saints&rsquo; Legends
-                            </Typography>
-                          </div>
-                          <div className={classes.column}>
-                            <Typography
-                              className={classes.secondaryHeading}
-                            >
-                              Narrow your selection by saints&rsquo; legends
-                            </Typography>
-                          </div>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                          <Typography>
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                             malesuada lacus ex, sit amet blandit leo lobortis eget.
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                             malesuada lacus ex, sit amet blandit leo lobortis eget.
-                          </Typography>
-                        </ExpansionPanelDetails>
-                      </ExpansionPanel>
+                          </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                      </div>
                     </CardBody>
                     <CardFooter />
                   </Card>
