@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MUIDataTable from 'mui-datatables';
 
 const columns = [
@@ -21,7 +22,10 @@ const columns = [
 ];
 
 const options = {
-  filterType: 'checkbox',
+  filter: false,
+  print: false,
+  viewColumns: false,
+  responsive: 'scroll',
 };
 
 const ManuscriptsTable = (props) => {
@@ -34,6 +38,10 @@ const ManuscriptsTable = (props) => {
       options={options}
     />
   );
+};
+
+ManuscriptsTable.propTypes = {
+  manuscripts: PropTypes.array.isRequired,
 };
 
 export default ManuscriptsTable;

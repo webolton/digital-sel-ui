@@ -9,7 +9,15 @@ const theme = createMuiTheme({
   overrides: {
     MUIDataTableBodyCell: {
       root: {
-        minWidth: 400,
+        width: '100vw',
+        position: 'relative',
+      },
+    },
+    MUIDataTableSearch: {
+      clearIcon: {
+        '&:hover,&:focus': {
+          color: '#AF3533',
+        },
       },
     },
   },
