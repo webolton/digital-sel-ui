@@ -21,15 +21,21 @@ const columns = [
   },
 ];
 
-const options = {
-  filter: false,
-  print: false,
-  viewColumns: false,
-  responsive: 'scroll',
-};
+const handleSelect = () => {
+  console.log(this.state)
+}
 
 const ManuscriptsTable = (props) => {
   const { manuscripts } = props;
+
+  const options = {
+    filter: false,
+    print: false,
+    viewColumns: false,
+    responsive: 'scroll',
+    onRowsSelect: handleSelect,
+  };
+
   return (
     <MUIDataTable
       title="Manuscripts"

@@ -34,6 +34,11 @@ const dashBoardStyles = theme => ({
   column: {
     flexBasis: '33.33%',
   },
+  progress: {
+    width: '50%',
+    margin: '0 auto',
+    textAlign: 'center',
+  },
 });
 
 export default dashBoardStyles;

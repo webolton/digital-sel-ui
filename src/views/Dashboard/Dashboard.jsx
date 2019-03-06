@@ -16,6 +16,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
 import ManuscriptsTable from './ManuscriptsTable';
 
@@ -54,51 +55,57 @@ class Dashboard extends React.Component {
               </Typography>
             </CardHeader>
             <CardBody>
-              <div className={classes.panelWrapper}>
-                <ExpansionPanel>
-                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <div className={classes.column}>
-                      <Typography className={classes.heading}>Manuscripts</Typography>
-                    </div>
-                    <div className={classes.column}>
-                      <Typography
-                        className={classes.secondaryHeading}
-                      >
+              {(fetchingMSS || fetchingSts) ? (
+                <div className={classes.progress}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                <div className={classes.panelWrapper}>
+                  <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <div className={classes.column}>
+                        <Typography className={classes.heading}>Manuscripts</Typography>
+                      </div>
+                      <div className={classes.column}>
+                        <Typography
+                          className={classes.secondaryHeading}
+                        >
                       Filter your selection by manuscript
-                      </Typography>
-                    </div>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <ManuscriptsTable manuscripts={manuscripts} />
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <ExpansionPanel>
-                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <div className={classes.column}>
-                      <Typography
-                        className={classes.heading}
-                      >
+                        </Typography>
+                      </div>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <ManuscriptsTable manuscripts={manuscripts} />
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                  <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <div className={classes.column}>
+                        <Typography
+                          className={classes.heading}
+                        >
                       Saints&rsquo; Legends
-                      </Typography>
-                    </div>
-                    <div className={classes.column}>
-                      <Typography
-                        className={classes.secondaryHeading}
-                      >
+                        </Typography>
+                      </div>
+                      <div className={classes.column}>
+                        <Typography
+                          className={classes.secondaryHeading}
+                        >
                       Filter your selection by saints&rsquo; legends
+                        </Typography>
+                      </div>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Typography>
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                       malesuada lacus ex, sit amet blandit leo lobortis eget.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                       malesuada lacus ex, sit amet blandit leo lobortis eget.
                       </Typography>
-                    </div>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <Typography>
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                       malesuada lacus ex, sit amet blandit leo lobortis eget.
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                       malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </Typography>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-              </div>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                </div>
+              )}
             </CardBody>
             <CardFooter />
           </Card>
