@@ -19,6 +19,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
 import ManuscriptsTable from './ManuscriptsTable';
+import SaintsLegendsTable from './SaintsLegendsTable';
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -96,12 +97,7 @@ class Dashboard extends React.Component {
                       </div>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                      <Typography>
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                       malesuada lacus ex, sit amet blandit leo lobortis eget.
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                       malesuada lacus ex, sit amet blandit leo lobortis eget.
-                      </Typography>
+                      <SaintsLegendsTable saints_legends={saints_legends} />
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
                 </div>
