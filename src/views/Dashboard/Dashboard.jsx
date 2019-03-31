@@ -32,6 +32,10 @@ class Dashboard extends React.Component {
     console.log(manuscripts);
   }
 
+  handleSaintsLegendsChange = (saintsLegends) => {
+    console.log(saintsLegends);
+  }
+
   render() {
     const {
       classes,
@@ -111,7 +115,10 @@ class Dashboard extends React.Component {
                       </div>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                      <SaintsLegendsTable saints_legends={saints_legends} />
+                      <SaintsLegendsTable
+                        saints_legends={saints_legends}
+                        handleSaintsLegendsChange={this.handleSaintsLegendsChange}
+                      />
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
                 </div>

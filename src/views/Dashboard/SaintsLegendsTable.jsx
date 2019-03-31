@@ -21,33 +21,45 @@ const columns = [
   },
 ];
 
-const handleSelect = () => {
-  console.log(this.state)
+class SaintsLegendsTable extends React.Component {
+  handleSelect = (rows, saints_legends) => {
+    const { handleSaintsLegendsChange } = this.props;
+    const currentSaintsLegends = [];
+    rows.forEach((row) => {
+      if (saints_legends[row.dataIndex]) {
+        currentSaintsLegends.push(saints_legends[row.dataIndex]);
+      }
+    });
+    handleSaintsLegendsChange(currentSaintsLegends);
+  }
+
+  render() {
+    const { saints_legends } = this.props;
+
+    const options = {
+      filter: false,
+      print: false,
+      viewColumns: false,
+      responsive: 'scroll',
+      onRowsSelect: (currentRowsSelected, allRowsSelected) => {
+        this.handleSelect(allRowsSelected, saints_legends);
+      },
+    };
+
+    return (
+      <MUIDataTable
+        title="Saints Legends"
+        data={saints_legends}
+        columns={columns}
+        options={options}
+      />
+    );
+  }
 }
 
-const SaintsLegendsTable = (props) => {
-  const { saints_legends } = props;
-
-  const options = {
-    filter: false,
-    print: false,
-    viewColumns: false,
-    responsive: 'scroll',
-    onRowsSelect: handleSelect,
-  };
-
-  return (
-    <MUIDataTable
-      title="Saints Legends"
-      data={saints_legends}
-      columns={columns}
-      options={options}
-    />
-  );
-};
-
 SaintsLegendsTable.propTypes = {
-  manuscripts: PropTypes.array.isRequired,
+  saints_legends: PropTypes.array.isRequired,
+  handleSaintsLegendsChange: PropTypes.func.isRequired,
 };
 
 export default SaintsLegendsTable;
