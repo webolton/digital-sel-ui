@@ -28,6 +28,10 @@ class Dashboard extends React.Component {
     fetchSaintsLegends();
   }
 
+  handleManuscriptChange = (manuscripts) => {
+    console.log(manuscripts);
+  }
+
   render() {
     const {
       classes,
@@ -52,10 +56,17 @@ class Dashboard extends React.Component {
                 color="inherit"
                 align="center"
               >
-                Text Selector
+                Text Selection Dashboard
               </Typography>
             </CardHeader>
             <CardBody>
+              <Card className={classes.selectionInfoWrapper}>
+                <CardBody>
+                  <Typography>
+                    No texts selected.
+                  </Typography>
+                </CardBody>
+              </Card>
               {(fetchingMSS || fetchingSts) ? (
                 <div className={classes.progress}>
                   <CircularProgress />
@@ -76,7 +87,10 @@ class Dashboard extends React.Component {
                       </div>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                      <ManuscriptsTable manuscripts={manuscripts} />
+                      <ManuscriptsTable
+                        manuscripts={manuscripts}
+                        handleManuscriptChange={this.handleManuscriptChange}
+                      />
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
                   <ExpansionPanel>

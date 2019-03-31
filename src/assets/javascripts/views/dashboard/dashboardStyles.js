@@ -31,6 +31,9 @@ const dashBoardStyles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  selectionInfoWrapper: {
+    margin: '0 0 20px 0',
+  },
   column: {
     flexBasis: '33.33%',
   },
