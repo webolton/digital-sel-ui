@@ -30,7 +30,7 @@ const HomePage = () => (
           enjoyed widespread readership, being copied until the fifteenth century. Today, the <em>SEL</em> survives in part
           or whole in more than 60 manuscripts. The legendary&rsquo;s popularity and the readiness of later poets and scribes
           to revise and supplement the collection mean that there is a large degree of textual variation between
-          individual witnesses of the <em>SEL</em>. Despite a great deal of work by earlier scholars, the <em>SEL</em>
+          individual witnesses of the <em>SEL</em>. Despite a great deal of work by earlier scholars, the <em>SEL </em>
           has never been edited in whole and the editions that have appeared are typical of printed editions in that they present
           a base text with variations noted in a critical apparatus.</p>
 
@@ -47,7 +47,7 @@ const HomePage = () => (
         <p>
           This version of the site represents a complete re-write / rework of the first conception of
           the project, which is still available at the <a href="http://digitalsel.org">digitalsel.org</a>.
-          The original version of the sight was my first programming project, and this version is
+          The original version of the site was my first programming project, and this version is
           much more in line with modern web software development.
         </p>
         <p>
@@ -55,7 +55,7 @@ const HomePage = () => (
           blogging about my progress recently. Additional <a href="http://blog.digitalsel.org" target="_blank">blog posts </a>
           are forthcoming, and all of my progress is available at <a href="https://github.com/webolton" target="_blank">GitHub</a>.
           If you are interested in contributing to the project in any way, feel free to reach out to me
-          on <a href="https://twitter.com/william_ellet" target="_blank">Twitter</a>
+          on <a href="https://twitter.com/william_ellet" target="_blank">Twitter</a>.
         </p>
         </CardBody>
       </Card>
