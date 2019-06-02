@@ -10,7 +10,9 @@ import history from 'store/history';
 import { store, persistor } from './store/store';
 import './assets/stylesheets/main.css';
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
+import { unregister } from './registerServiceWorker';
+unregister(); // TODO: When site is more production ready, chunk caching better.
 
 const target = document.querySelector('#root');
 
@@ -26,5 +28,3 @@ render(
   </Provider>,
   target,
 );
-
-registerServiceWorker();
