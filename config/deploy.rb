@@ -15,7 +15,7 @@ set :nvm_type,        :user
 set :nvm_node,        'v10.13.0'
 set :nvm_map_bins,    %w{node npm yarn}
 
-set :default_env,     {'NODE_PATH' => 'src'}
+set :default_env,     {'NODE_PATH' => 'src', 'REACT_APP_VERSION' => '1.0.1'} #TODO: Set from release tag
 
 set :yarn_flags,      %w{--silent --no-progress}
 
