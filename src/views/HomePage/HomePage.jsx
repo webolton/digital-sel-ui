@@ -2,11 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card';
 import CardBody from 'components/Card/CardBody';
 import homePageStyle from 'assets/javascripts/views/homePageStyle';
+
+const versionNumber = () => {
+  return process.env.REACT_APP_VERSION;
+}
 
 const HomePage = () => (
   <GridContainer>
@@ -14,7 +19,7 @@ const HomePage = () => (
     <GridItem xs={12} sm={12} md={8} lg={8}>
       <Card>
         <CardBody>
-        <h2><b>This version of the Digital SEL is under development.</b></h2>
+        <Typography variant="h6" gutterBottom>This version of the Digital SEL is under development.</Typography>
 
         <h2>Introduction</h2>
         <p>The <em>Digital South English Legendary</em> (<em>Digital SEL</em>) is a web-based,
@@ -57,6 +62,9 @@ const HomePage = () => (
           If you are interested in contributing to the project in any way, feel free to reach out to me
           on <a href="https://twitter.com/william_ellet" target="_blank">Twitter</a>.
         </p>
+        {versionNumber() &&
+          <Typography variant="p" gutterBottom>Version: {versionNumber()}</Typography>
+        }
         </CardBody>
       </Card>
     </GridItem>
