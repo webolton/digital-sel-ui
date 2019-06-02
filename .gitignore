@@ -9,6 +9,10 @@
 # production
 /build
 
+# Capistrano variables
+config/deploy/production.rb
+config/deploy/staging.rb
+
 # compiled assets
 src/**/*.css
 
