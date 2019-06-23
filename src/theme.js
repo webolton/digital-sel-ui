@@ -5,6 +5,9 @@ const theme = createMuiTheme({
     primary: {
       main: '#336FAF',
     },
+    secondary: {
+      main: '#39C380',
+    },
   },
   overrides: {
     MUIDataTableBodyCell: {

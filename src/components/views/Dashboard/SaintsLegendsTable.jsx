@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MUIDataTable from 'mui-datatables';
 
 const columns = [
-    {
+  {
     name: 'title',
     label: 'Title',
     options: {
@@ -33,9 +33,19 @@ class SaintsLegendsTable extends React.Component {
     handleSaintsLegendsChange(currentSaintsLegends);
   }
 
+  transcriptionAvailible = (dataIndex, saints_legends) => {
+    const currentLegend = saints_legends[dataIndex];
+    let isTranscribed;
+    currentLegend.witnesses.forEach((witness) => {
+      if (witness.transcribed === true) {
+        isTranscribed = true;
+      }
+    });
+    return isTranscribed;
+  }
+
   render() {
     const { saints_legends } = this.props;
-    console.log(saints_legends)
     const options = {
       filter: false,
       print: false,
@@ -44,6 +54,7 @@ class SaintsLegendsTable extends React.Component {
       onRowsSelect: (currentRowsSelected, allRowsSelected) => {
         this.handleSelect(allRowsSelected, saints_legends);
       },
+      isRowSelectable: dataIndex => this.transcriptionAvailible(dataIndex, saints_legends),
     };
 
     return (
