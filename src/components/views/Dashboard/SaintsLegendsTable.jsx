@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import MUIDataTable from 'mui-datatables';
 
 const columns = [
+    {
+    name: 'title',
+    label: 'Title',
+    options: {
+      filter: true,
+      sort: false,
+    },
+  },
   {
     name: 'siglum',
     label: 'Siglum',
     options: {
       filter: true,
       sort: true,
-    },
-  },
-  {
-    name: 'title',
-    label: 'Title',
-    options: {
-      filter: true,
-      sort: false,
     },
   },
 ];
@@ -35,7 +35,7 @@ class SaintsLegendsTable extends React.Component {
 
   render() {
     const { saints_legends } = this.props;
-
+    console.log(saints_legends)
     const options = {
       filter: false,
       print: false,

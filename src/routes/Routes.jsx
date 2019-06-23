@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import isNil from 'lodash/isNil';
 import PropTypes from 'prop-types';
-import HomePage from 'views/HomePage';
-import LoginPage from 'views/Users/LoginPage';
-import LogoutPage from 'views/Users/LogoutPage';
-import ShowUserPage from 'views/Users/ShowUserPage';
-import SignUpPage from 'views/Users/SignUpPage';
-import Dashboard from 'views/Dashboard';
-import NotFoundPage from 'views/Errors/NotFoundPage';
+import HomePage from 'components/views/HomePage';
+import LoginPage from 'components/views/Users/LoginPage';
+import LogoutPage from 'components/views/Users/LogoutPage';
+import ShowUserPage from 'components/views/Users/ShowUserPage';
+import SignUpPage from 'components/views/Users/SignUpPage';
+import Dashboard from 'components/views/Dashboard';
+import NotFoundPage from 'components/views/Errors/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 
 const Routes = (props) => {

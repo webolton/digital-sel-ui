@@ -8,7 +8,7 @@ import appStyles from 'assets/javascripts/views/appStyles';
 import Header from 'components/Header';
 import HeaderLinks from 'components/Header/HeaderLinks';
 import Footer from 'components/Footer';
-import withTransition from 'views/layouts/withTransition';
+import withTransition from 'components/views/layouts/withTransition';
 import PositionedSnackbar from 'components/Alert/PositionedSnackbar';
 import alertActions from 'actions/alertActions';
 import { MuiThemeProvider } from '@material-ui/core/styles';

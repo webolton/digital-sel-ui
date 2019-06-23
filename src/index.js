@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
-import App from 'views/App';
+import App from 'components/views/App';
 import history from 'store/history';
 import { store, persistor } from './store/store';
 import './assets/stylesheets/main.css';
