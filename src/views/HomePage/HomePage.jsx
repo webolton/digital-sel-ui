@@ -109,7 +109,7 @@ texts at the same time. The ultimate goal of the
             much more in line with modern web software development.
           </Typography>
 
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="body1" paragraph>
             This iteration of the project is in active development, though I have neglected
             blogging about my progress recently. Additional
             {' '}
@@ -121,13 +121,14 @@ are forthcoming, and all of my progress is available at
             {' '}
             <Link href="https://github.com/webolton" target="_blank" rel="noopener">GitHub</Link>
 .
+          </Typography>
+          <Typography variant="body1" gutterBottom>
             If you are interested in contributing to the project in any way, feel free to reach out
             to me on
             {' '}
             <Link href="https://twitter.com/william_ellet" target="_blank" rel="noopener">
               Twitter
             </Link>
-.
           </Typography>
           {versionNumber()
           && (
