@@ -1,11 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import MUIDataTable from 'mui-datatables';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles } from '@material-ui/core/styles';
+import { Field, reduxForm } from 'redux-form';
+import Checkbox from '@material-ui/core/Checkbox';
 
-const formatWitnessCheckBoxes = (value) => {
-  console.log(value)
-}
+const styles = {};
 
+const renderCheckbox = ({ input, label, witness }) => (
+  <div>
+    <FormControlLabel
+      control={(
+        <Checkbox
+          value={witness.id}
+          onChange={input.onChange}
+        />
+)}
+      label={label}
+    />
+  </div>
+);
+
+const formatMsCheckboxes = witness => (
+  <Field name={`"${witness.id}""`} component={renderCheckbox} label={witness.ms_siglum} witness={witness} value={witness.id} />
+);
+
+const formatWitnessMsList = witnesses => (
+  <form>
+    <FormGroup row aria-label="Saints' Legend-Manuscript Choices">
+      {witnesses.map(witness => (
+        formatMsCheckboxes(witness)
+      ))}
+    </FormGroup>
+  </form>
+);
 const columns = [
   {
     name: 'title',
@@ -21,10 +53,7 @@ const columns = [
     options: {
       filter: true,
       sort: true,
-      customBodyRender: (value, tableMeta, updateValue) => {
-        formatWitnessCheckBoxes(value)
-        return 'cats'
-      }
+      customBodyRender: (witnesses, tableMeta, updateValue) => formatWitnessMsList(witnesses),
     },
   },
 ];
@@ -43,18 +72,12 @@ class SaintsLegendsTable extends React.Component {
 
   transcriptionAvailible = (dataIndex, saints_legends) => {
     const currentLegend = saints_legends[dataIndex];
-    let isTranscribed;
-    currentLegend.witnesses.forEach((witness) => {
-      if (witness.transcribed === true) {
-        isTranscribed = true;
-      }
-    });
-    return isTranscribed;
+    currentLegend.witnesses.forEach(witness => witness.transcribed);
   }
 
   render() {
     const { saints_legends } = this.props;
-    console.log(saints_legends)
+    // console.log(saints_legends)
     const options = {
       filter: false,
       print: false,
@@ -82,4 +105,14 @@ SaintsLegendsTable.propTypes = {
   handleSaintsLegendsChange: PropTypes.func.isRequired,
 };
 
-export default SaintsLegendsTable;
+export default compose(
+  connect(
+    state => ({ // eslint-disable-line no-unused-vars
+    }),
+  ),
+  reduxForm({
+    form: 'SaintsLegendsForm',
+    enableReinitialize: true,
+  }),
+  withStyles(styles),
+)(SaintsLegendsTable);

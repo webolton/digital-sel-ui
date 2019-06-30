@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
+import { formValueSelector } from 'redux-form';
 import manuscriptActions from 'actions/manuscriptActions';
 import saintsLegendActions from 'actions/saintsLegendActions';
 import PropTypes from 'prop-types';
@@ -20,6 +21,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
 import ManuscriptsTable from './ManuscriptsTable';
 import SaintsLegendsTable from './SaintsLegendsTable';
+
+const selector = formValueSelector('SaintsLegendsForm');
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -48,7 +51,9 @@ class Dashboard extends React.Component {
 
     const { manuscripts } = this.props.manuscripts.manuscripts;
     const { saints_legends } = this.props.saintsLegends.saintsLegends;
-
+    if (this.props.selectedWitnesses.formData) {
+      console.log(this.props.selectedWitnesses.formData.values);
+    }
     return (
       <GridContainer className={classes.dashboardContainer}>
         <GridItem xs={0} sm={0} md={2} lg={2} />
@@ -86,7 +91,7 @@ class Dashboard extends React.Component {
                         <Typography
                           className={classes.secondaryHeading}
                         >
-                      Filter your selection by manuscript
+                          Filter your selection by manuscript
                         </Typography>
                       </div>
                     </ExpansionPanelSummary>
@@ -103,7 +108,7 @@ class Dashboard extends React.Component {
                         <Typography
                           className={classes.heading}
                         >
-                      Saints&rsquo; Legends
+                          Saints&rsquo; Legends
                         </Typography>
                       </div>
                       <div className={classes.column}>
@@ -152,12 +157,14 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-
 export default compose(
   connect(
     state => ({
       manuscripts: state.manuscripts,
       saintsLegends: state.saintsLegends,
+      selectedWitnesses: {
+        formData: state.form.SaintsLegendsForm,
+      },
     }),
     {
       fetchManuscripts: manuscriptActions.fetchManuscripts,
