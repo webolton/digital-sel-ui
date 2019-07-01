@@ -28,11 +28,11 @@ class Dashboard extends React.Component {
   }
 
   handleManuscriptChange = (manuscripts) => {
-    console.log(manuscripts);
+    // console.log(manuscripts);
   }
 
   handleSaintsLegendsChange = (saintsLegends) => {
-    console.log(saintsLegends);
+    // console.log(saintsLegends);
   }
 
   render() {
@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
     const { manuscripts } = this.props.manuscripts.manuscripts;
     const { saints_legends } = this.props.saintsLegends.saintsLegends;
     if (this.props.selectedWitnesses.formData) {
-      console.log(this.props.selectedWitnesses.formData.values);
+      // console.log(this.props.selectedWitnesses.formData.values);
     }
     return (
       <GridContainer className={classes.dashboardContainer}>

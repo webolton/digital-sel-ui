@@ -1,22 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import MUIDataTable from 'mui-datatables';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles } from '@material-ui/core/styles';
+import { Field, reduxForm } from 'redux-form';
+import Checkbox from '@material-ui/core/Checkbox';
+
+const styles = {};
+
+const renderCheckbox = ({ input, label, witness }) => (
+  <div>
+    <FormControlLabel
+      control={(
+        <Checkbox
+          value={witness.id}
+          onChange={input.onChange}
+        />
+      )}
+      label={label}
+    />
+  </div>
+);
+
+const formatMsCheckboxes = witness => (
+  <Field name={`"${witness.id}""`} component={renderCheckbox} label={witness.ms_siglum} witness={witness} value={witness.id} />
+);
+
+const formatWitnessList = witnesses => (
+  <form>
+    {console.log(witnesses)}
+    <FormGroup row aria-label="Saints' Legend-Manuscript Choices">
+      {witnesses.map(witness => (
+        formatMsCheckboxes(witness)
+      ))}
+    </FormGroup>
+  </form>
+);
 
 const columns = [
   {
-    name: 'siglum',
-    label: 'Siglum',
+    name: 'shelfmark',
+    label: 'Shelfmark',
     options: {
       filter: true,
       sort: true,
     },
   },
   {
-    name: 'shelfmark',
-    label: 'Shelfmark',
+    name: 'witnesses',
+    label: 'Saints\' Legends',
     options: {
       filter: true,
       sort: false,
+      customBodyRender: (witnesses, tableMeta, updateValue) => formatWitnessList(witnesses),
     },
   },
 ];
@@ -62,4 +101,14 @@ ManuscriptsTable.propTypes = {
   handleManuscriptChange: PropTypes.func.isRequired,
 };
 
-export default ManuscriptsTable;
+export default compose(
+  connect(
+    state => ({ // eslint-disable-line no-unused-vars
+    }),
+  ),
+  reduxForm({
+    form: 'ManuscriptsForm',
+    enableReinitialize: true,
+  }),
+  withStyles(styles),
+)(ManuscriptsTable);

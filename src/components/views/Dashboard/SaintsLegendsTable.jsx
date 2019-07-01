@@ -19,7 +19,7 @@ const renderCheckbox = ({ input, label, witness }) => (
           value={witness.id}
           onChange={input.onChange}
         />
-)}
+      )}
       label={label}
     />
   </div>
