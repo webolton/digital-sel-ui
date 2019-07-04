@@ -8,11 +8,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 import { Field, reduxForm } from 'redux-form';
 import Checkbox from '@material-ui/core/Checkbox';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = {};
 
 const renderCheckbox = ({ input, label, witness }) => (
-  <div>
+  <Tooltip title={witness.shelfmark} aria-label={witness.shelfmark}>
     <FormControlLabel
       control={(
         <Checkbox
@@ -22,7 +23,7 @@ const renderCheckbox = ({ input, label, witness }) => (
       )}
       label={label}
     />
-  </div>
+  </Tooltip>
 );
 
 const formatMsCheckboxes = witness => (
