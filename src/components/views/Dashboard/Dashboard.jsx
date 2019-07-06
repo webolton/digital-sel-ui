@@ -17,6 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
 import ManuscriptsTable from './ManuscriptsTable';
 import SaintsLegendsTable from './SaintsLegendsTable';
+import _ from 'lodash';
 
 const selector = formValueSelector('SaintsLegendsForm');
 
@@ -35,6 +36,21 @@ class Dashboard extends React.Component {
     // console.log(saintsLegends);
   }
 
+  selectedWitnesses = () => {
+    let selectedWitnessIds = [];
+    const slData = this.props.selectedWitnesses.slData;
+    const msData = this.props.selectedWitnesses.msData;
+    if (this.props.selectedWitnesses.slData || this.props.selectedWitnesses.msData) {
+      if (this.props.selectedWitnesses.slData.values) {
+        // const selectedWitnessIds = [];
+        const current = this.props.selectedWitnesses.slData.values;
+        console.log(Object.keys(current))
+        const selectedWitnesses = selectedWitnessIds.concat(Object.keys(current.map(key => parseInt(key))))
+        console.log(selectedWitnesses)
+      }
+    }
+  }
+
   render() {
     const {
       classes,
@@ -47,9 +63,9 @@ class Dashboard extends React.Component {
 
     const { manuscripts } = this.props.manuscripts.manuscripts;
     const { saints_legends } = this.props.saintsLegends.saintsLegends;
-    if (this.props.selectedWitnesses.formData) {
-      // console.log(this.props.selectedWitnesses.formData.values);
-    }
+
+    this.selectedWitnesses();
+
     return (
       <GridContainer className={classes.dashboardContainer}>
         <GridItem xs={0} sm={0} md={2} lg={2} />
@@ -147,7 +163,8 @@ export default compose(
       manuscripts: state.manuscripts,
       saintsLegends: state.saintsLegends,
       selectedWitnesses: {
-        formData: state.form.SaintsLegendsForm,
+        slData: state.form.SaintsLegendsForm,
+        msData: state.form.ManuscriptsForm,
       },
     }),
     {

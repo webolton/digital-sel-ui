@@ -27,7 +27,7 @@ const renderCheckbox = ({ input, label, witness }) => (
 );
 
 const formatMsCheckboxes = witness => (
-  <Field name={`"${witness.id}""`} component={renderCheckbox} label={witness.ms_siglum} witness={witness} value={witness.id} />
+  <Field name={`${witness.id}`} component={renderCheckbox} label={witness.ms_siglum} witness={witness} value={witness.id} />
 );
 
 const formatWitnessMsList = witnesses => (

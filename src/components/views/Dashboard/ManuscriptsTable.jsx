@@ -38,7 +38,6 @@ const formatSlCheckboxes = witness => (
 
 const formatWitnessList = witnesses => (
   <form>
-    {console.log(witnesses)}
     <FormGroup row aria-label="Saints' Legend-Manuscript Choices">
       {witnesses.map(witness => (
         formatSlCheckboxes(witness)
