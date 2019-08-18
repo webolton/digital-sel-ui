@@ -6,15 +6,24 @@ import MUIDataTable from 'mui-datatables';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
-import { Field, reduxForm } from 'redux-form';
+import { Field, formValueSelector } from 'redux-form';
 import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = {};
 
-const renderCheckbox = ({ input, label, witness }) => (
+const checkedValue = (props) => {
+  // console.log(props)
+}
+
+const updateValue = (value) => {
+  // console.log(value)
+}
+
+const renderCheckbox = ({ input, label, witness, input: {onChange} }) => (
   <Tooltip title={witness.shelfmark} aria-label={witness.shelfmark}>
     <FormControlLabel
+      checked={witness.selected}
       control={(
         <Checkbox
           value={witness.id}
@@ -26,18 +35,20 @@ const renderCheckbox = ({ input, label, witness }) => (
   </Tooltip>
 );
 
-const formatMsCheckboxes = witness => (
-  <Field name={`${witness.id}`} component={renderCheckbox} label={witness.ms_siglum} witness={witness} value={witness.id} />
+
+const formatMsCheckboxes = (witness) => (
+  <Field name={`'${witness.id}'`} component={renderCheckbox} label={witness.ms_siglum} witness={witness} value={witness.id} onChange={updateValue}/>
 );
 
-const formatWitnessMsList = witnesses => (
-  <form>
-    <FormGroup row aria-label="Saints' Legend-Manuscript Choices">
-      {witnesses.map(witness => (
-        formatMsCheckboxes(witness)
-      ))}
-    </FormGroup>
-  </form>
+const formatWitnessMsList = (witnesses, tableMeta, updateValue) => (
+  <FormGroup
+    row
+    aria-label="Saints' Legend-Manuscript Choices"
+    >
+    {witnesses.map(witness => (
+      formatMsCheckboxes(witness)
+    ))}
+  </FormGroup>
 );
 const columns = [
   {
@@ -59,17 +70,21 @@ const columns = [
   },
 ];
 
+
 class SaintsLegendsTable extends React.Component {
-  handleSelect = (rows, saints_legends) => {
-    const { handleSaintsLegendsChange } = this.props;
-    const currentSaintsLegends = [];
-    rows.forEach((row) => {
-      if (saints_legends[row.dataIndex]) {
-        currentSaintsLegends.push(saints_legends[row.dataIndex]);
-      }
-    });
-    handleSaintsLegendsChange(currentSaintsLegends);
-  }
+  // state = { selectedIds: [] }
+  //
+  // handleSelect = (rows, saints_legends) => {
+  //   const { handleSaintsLegendsChange } = this.props;
+  //   const currentSaintsLegends = [];
+  //   rows.forEach((row) => {
+  //     if (saints_legends[row.dataIndex]) {
+  //       currentSaintsLegends.push(saints_legends[row.dataIndex]);
+  //     }
+  //   });
+  //   handleSaintsLegendsChange(currentSaintsLegends);
+  // }
+  //
 
   transcriptionAvailible = (dataIndex, saints_legends) => {
     const currentLegend = saints_legends[dataIndex];
@@ -77,8 +92,8 @@ class SaintsLegendsTable extends React.Component {
   }
 
   render() {
-    const { saints_legends } = this.props;
-    // console.log(saints_legends)
+    const { saints_legends, loadIds } = this.props;
+
     const options = {
       filter: false,
       print: false,
@@ -87,33 +102,39 @@ class SaintsLegendsTable extends React.Component {
       onRowsSelect: (currentRowsSelected, allRowsSelected) => {
         this.handleSelect(allRowsSelected, saints_legends);
       },
-      isRowSelectable: dataIndex => this.transcriptionAvailible(dataIndex, saints_legends),
+      // isRowSelectable: dataIndex => this.transcriptionAvailible(dataIndex, witnesses),
     };
 
     return (
+      <div>
+        <button type="button" onClick={() => loadIds(witnessIds)}>
+          Load Account
+        </button>
       <MUIDataTable
         title="Saints Legends"
         data={saints_legends}
         columns={columns}
         options={options}
       />
+    </div>
     );
   }
 }
 
 SaintsLegendsTable.propTypes = {
-  saints_legends: PropTypes.array.isRequired,
-  handleSaintsLegendsChange: PropTypes.func.isRequired,
+  witnesses: PropTypes.array.witnesses,
+  // handleSaintsLegendsChange: PropTypes.func.isRequired,
 };
 
+const selector = formValueSelector('selectedWitnesses')
 export default compose(
   connect(
-    state => ({ // eslint-disable-line no-unused-vars
+    state => ({
+      selectedWitnesses: {
+        witnessData: state.form.witnessesForm,
+      },
+      selectedIds: selector(state, 'selectedIds')
     }),
   ),
-  reduxForm({
-    form: 'SaintsLegendsForm',
-    enableReinitialize: true,
-  }),
   withStyles(styles),
 )(SaintsLegendsTable);

@@ -1,5 +1,6 @@
 export default function reducer(state = {
   witnesses: [],
+  saints_legends: [],
 }, action) {
   switch (action.type) {
     case 'FETCHING_WITNESSES': {

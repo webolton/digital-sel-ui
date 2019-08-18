@@ -2,9 +2,9 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import { formValueSelector } from 'redux-form';
-import manuscriptActions from 'actions/manuscriptActions';
-import saintsLegendActions from 'actions/saintsLegendActions';
+import { formValueSelector, change } from 'redux-form';
+import { load as witnessIdReducer } from 'reducers/witnessIdReducer';
+import witnessActions from 'actions/witnessActions';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import GridContainer from 'components/Grid/GridContainer';
@@ -17,58 +17,62 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import dashboardStyles from 'assets/javascripts/views/dashboard/dashboardStyles';
 import ManuscriptsTable from './ManuscriptsTable';
 import SaintsLegendsTable from './SaintsLegendsTable';
+import { reset, reduxForm } from 'redux-form';
 import _ from 'lodash';
+
+const witnessIds = {1: true};
 
 const selector = formValueSelector('SaintsLegendsForm');
 
+const mapDispatchToProps = (dispatch) => {
+   return bindActionCreators({change}, dispatch);
+}
+
 class Dashboard extends React.Component {
   componentDidMount() {
-    const { fetchManuscripts, fetchSaintsLegends } = this.props;
-    fetchManuscripts();
-    fetchSaintsLegends();
-  }
-
-  handleManuscriptChange = (manuscripts) => {
-    // console.log(manuscripts);
-  }
-
-  handleSaintsLegendsChange = (saintsLegends) => {
-    // console.log(saintsLegends);
+    const { fetchWitnesses, dispatch } = this.props;
+    fetchWitnesses();
+    dispatch(reset('witnessesForm'));
   }
 
   selectedWitnesses = () => {
-    let selectedWitnessIds = [];
-    const slData = this.props.selectedWitnesses.slData;
-    const msData = this.props.selectedWitnesses.msData;
-    if (this.props.selectedWitnesses.slData || this.props.selectedWitnesses.msData) {
-      if (this.props.selectedWitnesses.slData.values) {
-        // const selectedWitnessIds = [];
-        const current = this.props.selectedWitnesses.slData.values;
-        console.log(Object.keys(current))
-        const selectedWitnesses = selectedWitnessIds.concat(Object.keys(current.map(key => parseInt(key))))
-        console.log(selectedWitnesses)
+    if (this.props.selectedWitnesses.witnessData) {
+      if (this.props.selectedWitnesses.witnessData.values) {
+        console.log(this.props.selectedWitnesses.witnessData.values)
+        return this.props.selectedWitnesses.witnessData.values
       }
     }
+  }
+
+  setSelected = (witnessCollection) => {
+    const selectedWitnesses = this.selectedWitnesses();
+    if(selectedWitnesses) {
+      const updatedObject = {}
+      let updatedSaintsArray;
+      // console.log(witnessCollection)
+      // updatedSaintsArray = witnessCollection.saints_legends.map(legend => {
+      //   console.log(selectedWitnesses[witness.id.toString()])
+      //   debugger
+      // })
+    }
+    return witnessCollection
   }
 
   render() {
     const {
       classes,
+      loadIds,
+      change,
     } = this.props;
-
-    const fetchingMSS = this.props.manuscripts.fetching;
-    const fetchedMSS = this.props.manuscripts.fetched;
-    const fetchingSts = this.props.saintsLegends.fetching;
-    const fetchedSts = this.props.saintsLegends.fetched;
-
-    const { manuscripts } = this.props.manuscripts.manuscripts;
-    const { saints_legends } = this.props.saintsLegends.saintsLegends;
+    const { witnesses, saints_legends, manuscripts } = this.props.witnesses.witnesses;
+    const fetchingWitnesses = this.props.witnesses.fetching;
+    const fetchedWitnesses= this.props.witnesses.fetched;
 
     this.selectedWitnesses();
 
     return (
       <GridContainer className={classes.dashboardContainer}>
-        <GridItem xs={0} sm={0} md={2} lg={2} />
+      <GridItem xs={0} sm={0} md={2} lg={2} />
         <GridItem xs={12} sm={12} md={8} lg={8}>
           <Card>
             <CardHeader color="primary" className={classes.cardHeader}>
@@ -88,12 +92,12 @@ class Dashboard extends React.Component {
                   </Typography>
                 </CardBody>
               </Card>
-              {(fetchingMSS || fetchingSts) ? (
+              {fetchingWitnesses ? (
                 <div className={classes.progress}>
                   <CircularProgress />
                 </div>
               ) : (
-                <div className={classes.panelWrapper}>
+                <form className={classes.panelWrapper}>
                   <div className={classes.column}>
                     <Typography className={classes.heading}>Manuscripts</Typography>
                   </div>
@@ -107,6 +111,9 @@ class Dashboard extends React.Component {
                   <ManuscriptsTable
                     manuscripts={manuscripts}
                     handleManuscriptChange={this.handleManuscriptChange}
+                    selectedWitnesses={this.selectedWitnesses()}
+                    loadIds={loadIds}
+                    change={change}
                   />
                   <div className={classes.column}>
                     <Typography
@@ -122,11 +129,12 @@ class Dashboard extends React.Component {
                       Filter your selection by saints&rsquo; legends
                     </Typography>
                   </div>
-                  <SaintsLegendsTable
+                  {/* <SaintsLegendsTable
                     saints_legends={saints_legends}
                     handleSaintsLegendsChange={this.handleSaintsLegendsChange}
-                  />
-                </div>
+                    // selectedWitnesses={this.handleManuscriptChange()}
+                  /> */}
+                </form>
               )}
             </CardBody>
             <CardFooter />
@@ -160,17 +168,20 @@ Dashboard.propTypes = {
 export default compose(
   connect(
     state => ({
-      manuscripts: state.manuscripts,
-      saintsLegends: state.saintsLegends,
+      witnesses: state.witnesses,
+      initialValues: state.witnessIds,
       selectedWitnesses: {
-        slData: state.form.SaintsLegendsForm,
-        msData: state.form.ManuscriptsForm,
+        witnessData: state.form.witnessesForm,
       },
     }),
     {
-      fetchManuscripts: manuscriptActions.fetchManuscripts,
-      fetchSaintsLegends: saintsLegendActions.fetchSaintsLegends,
+      fetchWitnesses: witnessActions.fetchWitnesses,
+      loadIds: witnessIdReducer,
     },
   ),
+  reduxForm({
+    form: 'witnessesForm',
+    // enableReinitialize: true,
+  }),
   withStyles(dashboardStyles),
 )(Dashboard);
